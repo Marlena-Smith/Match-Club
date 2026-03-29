@@ -479,7 +479,7 @@ export default function StudentSurveyPage() {
         setIsAnimating(false)
       }, 150)
     } else {
-      router.back()
+      router.push("/student")
     }
   }
 
@@ -649,7 +649,7 @@ export default function StudentSurveyPage() {
               {formData.interest_tag_primary && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <p className="text-[16px] font-medium text-[#1A1A1A] mb-1">
-                    具体是哪个方向？
+                    具体��哪个方向？
                   </p>
                   <p className="text-[13px] text-[#666666] mb-3">
                     让我们更精准地了解你

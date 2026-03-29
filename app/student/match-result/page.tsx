@@ -215,7 +215,7 @@ export default function MatchResultPage() {
         {/* 顶部导航 - 44px 只有回退按钮和标题 */}
         <header className="h-[44px] px-4 flex items-center">
           <button 
-            onClick={() => router.back()}
+            onClick={() => router.push("/student")}
             className="w-8 h-8 rounded-[4px] flex items-center justify-center hover:bg-[#F0F0F0] transition-colors"
           >
             <ChevronLeft className="w-6 h-6 text-[#666666]" />
