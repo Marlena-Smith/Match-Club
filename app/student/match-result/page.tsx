@@ -1,7 +1,8 @@
 "use client"
 
-import { Bell, Home, Compass, Heart, User } from "lucide-react"
+import { ChevronLeft, Home, Compass, Heart, User } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 // 模拟匹配结果数据
 const matchResults = [
@@ -126,9 +127,9 @@ function MatchCard({
   return (
     <Link 
       href={`/student/club/${club.id}`}
-      className="block bg-white rounded-[4px] p-4 border border-[#E5E5E5] hover:shadow-sm transition-shadow active:scale-[0.99]"
+      className="block bg-white rounded-[8px] p-[8px] border border-[#E5E5E5] hover:shadow-sm transition-shadow active:scale-[0.99]"
     >
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-[8px]">
         <SimpleAvatar name={club.name} size={48} className="flex-shrink-0" />
         
         <div className="flex-1 min-w-0">
@@ -152,46 +153,56 @@ function MatchCard({
 }
 
 export default function MatchResultPage() {
+  const router = useRouter()
+
   return (
-    <div className="min-h-screen bg-[#F9F6E5] flex flex-col font-sans">
-      <div className="max-w-[390px] w-full mx-auto flex-1 flex flex-col relative">
+    <div className="min-h-screen bg-[#F9F6E5] flex flex-col font-sans overflow-hidden">
+      <div className="max-w-[390px] w-full mx-auto flex-1 flex flex-col relative overflow-hidden">
         
-        {/* 顶部导航 */}
-        <header className="px-4 pt-12 pb-3 flex items-center justify-between">
-          <Link href="/student/messages" className="flex flex-col items-center gap-1">
-            <div className="w-8 h-8 rounded-[4px] bg-[#F0F0F0] flex items-center justify-center">
-              <Bell className="w-4 h-4 text-[#666666]" />
-            </div>
-            <span className="text-[12px] text-[#666666]">消息</span>
-          </Link>
+        {/* 顶部导航 - 只有回退按钮和标题 */}
+        <header className="px-4 pt-12 pb-3 flex items-center">
+          <button 
+            onClick={() => router.back()}
+            className="w-8 h-8 rounded-[4px] flex items-center justify-center hover:bg-[#F0F0F0] transition-colors"
+          >
+            <ChevronLeft className="w-6 h-6 text-[#666666]" />
+          </button>
 
-          <h1 className="text-[18px] font-semibold text-[#1A1A1A]">匹配结果</h1>
-
-          <Link href="/login" className="flex flex-col items-center gap-1">
-            <div className="w-10 h-10 rounded-full bg-[#F0F0F0] border-2 border-[#E5E5E5]" />
-            <span className="text-[12px] text-[#666666]">登录</span>
-          </Link>
+          <h1 className="flex-1 text-center text-[18px] font-semibold text-[#1A1A1A]">匹配结果</h1>
+          
+          {/* 占位，保持标题居中 */}
+          <div className="w-8 h-8" />
         </header>
 
-        {/* 主内容 */}
-        <main className="flex-1 px-4 pb-20 overflow-y-auto">
-          <section className="space-y-3 mb-6">
+        {/* 主内容 - 隐藏滚动条 */}
+        <main className="flex-1 px-4 pb-20 overflow-y-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <style jsx>{`
+            main::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
+          
+          {/* 匹配结果卡片 - 间距8px */}
+          <section className="space-y-[8px]">
             {matchResults.map((club, index) => (
               <MatchCard key={index} club={club} />
             ))}
           </section>
 
-          <section>
-            <h2 className="text-[15px] font-semibold text-[#1A1A1A] mb-3">
+          {/* 推荐区域 - 与上方卡片间距24px */}
+          <section className="mt-[24px]">
+            <h2 className="text-[15px] font-semibold text-[#1A1A1A]">
               也可以看看这些...
             </h2>
-            <div className="flex flex-wrap gap-2">
+            {/* 按钮与文字间距16px */}
+            <div className="flex flex-wrap gap-2 mt-[16px]">
               {recommendedClubs.map((clubName, index) => (
                 <Link 
                   key={index} 
                   href={`/student/browse?search=${encodeURIComponent(clubName)}`}
                 >
-                  <span className="inline-block px-2.5 py-1 text-[13px] text-[#666666] bg-white border border-[#E5E5E5] rounded-[4px] hover:bg-[#F5F5F5] transition-colors">
+                  {/* 高度24px，圆角12px */}
+                  <span className="inline-flex items-center px-2.5 h-[24px] text-[13px] text-[#666666] bg-white border border-[#E5E5E5] rounded-[12px] hover:bg-[#F5F5F5] transition-colors">
                     {clubName}
                   </span>
                 </Link>
@@ -213,7 +224,7 @@ export default function MatchResultPage() {
             </Link>
             <Link href="/student/favorites" className="flex flex-col items-center gap-0.5 text-[#999999]">
               <Heart className="w-5 h-5" />
-              <span className="text-[11px]">收藏</span>
+              <span className="text-[11px]">我的</span>
             </Link>
             <Link href="/student/profile" className="flex flex-col items-center gap-0.5 text-[#999999]">
               <User className="w-5 h-5" />

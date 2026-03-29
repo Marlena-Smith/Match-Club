@@ -32,9 +32,12 @@ export function MCAvatar({
   className,
   onClick,
 }: MCAvatarProps) {
-  // 安全获取尺寸样式
-  const validSize = size && sizeStyles[size] ? size : "md"
-  const { container, text, pixels } = sizeStyles[validSize]
+  // 安全获取尺寸样式 - 始终使用默认值防止 undefined
+  const defaultStyle = { container: "w-12 h-12", text: "text-[16px]", pixels: 48 }
+  const currentStyle = (size && typeof size === "string" && sizeStyles[size as AvatarSize]) 
+    ? sizeStyles[size as AvatarSize] 
+    : defaultStyle
+  const { container, text, pixels } = currentStyle
   
   const getInitials = (name: string) => {
     return name.slice(0, 2).toUpperCase()
