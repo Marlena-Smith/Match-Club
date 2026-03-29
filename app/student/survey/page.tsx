@@ -1,5 +1,6 @@
 "use client"
 
+// Survey page - uses native HTML for avatar display
 import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { StatusBar } from "@/components/match-club/status-bar"

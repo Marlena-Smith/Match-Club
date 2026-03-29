@@ -8,7 +8,6 @@ import {
   MCCardContent,
   MCInnerCard,
   Tag, 
-  MCAvatar, 
   MCInput, 
   MCSelect,
   MatchPercent,
@@ -154,11 +153,12 @@ export default function DesignSystemPage() {
           </MCCardHeader>
           <MCCardContent>
             <div className="flex items-end gap-4">
-              <MCAvatar size="xs" fallback="小" />
-              <MCAvatar size="sm" fallback="小" />
-              <MCAvatar size="md" fallback="小明" />
-              <MCAvatar size="lg" fallback="小明" />
-              <MCAvatar size="xl" fallback="小明" />
+              {/* 使用原生 HTML 实现头像 */}
+              <div className="w-6 h-6 rounded-full bg-[#F0F0F0] flex items-center justify-center text-[11px] font-medium text-[#666666]">小</div>
+              <div className="w-8 h-8 rounded-full bg-[#F0F0F0] flex items-center justify-center text-[13px] font-medium text-[#666666]">小</div>
+              <div className="w-12 h-12 rounded-full bg-[#F0F0F0] flex items-center justify-center text-[16px] font-medium text-[#666666]">小明</div>
+              <div className="w-16 h-16 rounded-full bg-[#F0F0F0] flex items-center justify-center text-[20px] font-medium text-[#666666]">小明</div>
+              <div className="w-20 h-20 rounded-full bg-[#F0F0F0] flex items-center justify-center text-[24px] font-medium text-[#666666]">小明</div>
             </div>
           </MCCardContent>
         </MCCard>
