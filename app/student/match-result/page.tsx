@@ -14,7 +14,7 @@ const matchResults = [
     matchScore: 92,
   },
   {
-    id: "2", 
+    id: "2",
     name: "xx大学音乐协会",
     avatar: null,
     tags: ["音乐", "唱歌", "摇滚", "吉他"],
@@ -68,11 +68,11 @@ function StatusBar() {
 }
 
 // 圆形进度条组件
-function CircularProgress({ 
-  percentage, 
-  size = 48, 
-  strokeWidth = 3 
-}: { 
+function CircularProgress({
+  percentage,
+  size = 48,
+  strokeWidth = 3
+}: {
   percentage: number
   size?: number
   strokeWidth?: number
@@ -113,18 +113,18 @@ function CircularProgress({
 }
 
 // 简单头像组件
-function SimpleAvatar({ 
-  name, 
+function SimpleAvatar({
+  name,
   size = 48,
   className = ""
-}: { 
+}: {
   name: string
   size?: number
   className?: string
 }) {
   const firstChar = name.charAt(0)
   return (
-    <div 
+    <div
       className={`rounded-full bg-[#F0F0F0] flex items-center justify-center text-[#666666] font-medium ${className}`}
       style={{ width: size, height: size, fontSize: size * 0.4 }}
     >
@@ -134,10 +134,10 @@ function SimpleAvatar({
 }
 
 // 标签组件
-function SimpleTag({ 
+function SimpleTag({
   children,
   className = ""
-}: { 
+}: {
   children: React.ReactNode
   className?: string
 }) {
@@ -149,19 +149,19 @@ function SimpleTag({
 }
 
 // 匹配结果卡片组件
-function MatchCard({ 
-  club 
-}: { 
+function MatchCard({
+  club
+}: {
   club: typeof matchResults[0]
 }) {
   return (
-    <Link 
+    <Link
       href={`/student/club/${club.id}`}
       className="block bg-white rounded-[8px] p-[8px] border border-[#E5E5E5] hover:shadow-sm transition-shadow active:scale-[0.99]"
     >
       <div className="flex items-center gap-[8px]">
         <SimpleAvatar name={club.name} size={48} className="flex-shrink-0" />
-        
+
         <div className="flex-1 min-w-0">
           <h3 className="text-[15px] font-medium text-[#1A1A1A] mb-2">
             {club.name}
@@ -172,7 +172,7 @@ function MatchCard({
             ))}
           </div>
         </div>
-        
+
         <div className="flex flex-col items-center flex-shrink-0">
           <CircularProgress percentage={club.matchScore} />
           <span className="text-[11px] text-[#999999] mt-1">匹配度</span>
@@ -206,15 +206,15 @@ export default function MatchResultPage() {
           scrollbar-width: none;
         }
       `}</style>
-      
+
       <div className="max-w-[390px] w-full mx-auto flex-1 flex flex-col relative overflow-hidden">
-        
+
         {/* 状态栏 - 44px */}
         <StatusBar />
-        
+
         {/* 顶部导航 - 44px 只有回退按钮和标题 */}
         <header className="h-[44px] px-4 flex items-center">
-          <button 
+          <button
             onClick={() => router.push("/student")}
             className="w-8 h-8 rounded-[4px] flex items-center justify-center hover:bg-[#F0F0F0] transition-colors"
           >
@@ -222,14 +222,14 @@ export default function MatchResultPage() {
           </button>
 
           <h1 className="flex-1 text-center text-[18px] font-semibold text-[#1A1A1A]">这些社团很适合你呢!</h1>
-          
+
           {/* 占位，保持标题居中 */}
           <div className="w-8 h-8" />
         </header>
 
         {/* 主内容 - 隐藏滚动条 */}
-        <main className="flex-1 px-4 pb-20 overflow-y-auto scrollbar-hide">
-          
+        <main className="flex-1 px-4 pt-16 pb-20 overflow-y-auto scrollbar-hide">
+
           {/* 匹配结果卡片 - 间距8px */}
           <section className="space-y-[8px]">
             {matchResults.map((club, index) => (
@@ -245,8 +245,8 @@ export default function MatchResultPage() {
             {/* 按钮与文字间距16px */}
             <div className="flex flex-wrap gap-2 mt-[16px]">
               {recommendedClubs.map((clubName, index) => (
-                <Link 
-                  key={index} 
+                <Link
+                  key={index}
                   href={`/student/browse?search=${encodeURIComponent(clubName)}`}
                 >
                   {/* 高度24px，圆角12px */}
@@ -264,7 +264,7 @@ export default function MatchResultPage() {
           <div className="max-w-[390px] mx-auto flex items-center justify-around h-14 px-4">
             {navItems.map((item) => {
               // 匹配结果页面属于"匹配"tab
-              const isActive = item.href === "/student/survey" 
+              const isActive = item.href === "/student/survey"
                 ? (pathname === "/student/survey" || pathname === "/student/match-result")
                 : pathname === item.href
               const Icon = item.icon
@@ -273,9 +273,8 @@ export default function MatchResultPage() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex flex-col items-center justify-center flex-1 h-full transition-colors duration-200 ${
-                    isActive ? "text-[#F5B70A]" : "text-[#999999] hover:text-[#666666]"
-                  }`}
+                  className={`flex flex-col items-center justify-center flex-1 h-full transition-colors duration-200 ${isActive ? "text-[#F5B70A]" : "text-[#999999] hover:text-[#666666]"
+                    }`}
                 >
                   <Icon
                     className={`w-6 h-6 mb-0.5 transition-transform ${isActive ? "scale-105" : ""}`}
