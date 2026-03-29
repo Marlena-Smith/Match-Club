@@ -464,10 +464,10 @@ export default function StudentSurveyPage() {
         setCurrentStep(currentStep + 1)
         setIsAnimating(false)
       }, 150)
-    } else {
-      // 提交表单
-      router.push("/student/match")
-    }
+} else {
+    // 提交表单，跳转到匹配结果页
+    router.push("/student/match-result")
+  }
   }
 
   const handleBack = () => {
