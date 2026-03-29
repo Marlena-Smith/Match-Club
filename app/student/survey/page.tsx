@@ -4,7 +4,7 @@ import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { StatusBar } from "@/components/match-club/status-bar"
 import { MCButton } from "@/components/match-club/mc-button"
-import { MCAvatar } from "@/components/match-club/mc-avatar"
+
 import { Tag } from "@/components/match-club/tag"
 import { ArrowLeft, Camera, GripVertical, ChevronDown, Check, Sparkles } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -560,12 +560,17 @@ export default function StudentSurveyPage() {
               <div className="flex flex-col items-center gap-3 py-4">
                 <div className="relative group">
                   <div className="absolute inset-0 bg-[#F5B70A]/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300" />
-                  <MCAvatar
-                    size="2xl"
-                    src={formData.avatar}
-                    fallback={formData.nickname || "你"}
-                    className="relative border-3 border-white shadow-lg group-hover:scale-105 transition-transform duration-200"
-                  />
+                  {formData.avatar ? (
+                    <img 
+                      src={formData.avatar} 
+                      alt="头像"
+                      className="w-24 h-24 rounded-full object-cover relative border-3 border-white shadow-lg group-hover:scale-105 transition-transform duration-200"
+                    />
+                  ) : (
+                    <div className="w-24 h-24 rounded-full bg-[#F0F0F0] flex items-center justify-center text-[28px] font-medium text-[#666666] relative border-3 border-white shadow-lg group-hover:scale-105 transition-transform duration-200">
+                      {(formData.nickname || "你").slice(0, 2)}
+                    </div>
+                  )}
                   <button className="absolute bottom-0 right-0 w-8 h-8 bg-[#F5B70A] rounded-[4px] flex items-center justify-center shadow-md hover:bg-[#C99700] active:scale-95 transition-all duration-200">
                     <Camera className="w-4 h-4 text-white" />
                   </button>
