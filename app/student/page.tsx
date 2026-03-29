@@ -1,7 +1,6 @@
 "use client"
 
 import { MCButton } from "@/components/match-club/mc-button"
-import { MCAvatar } from "@/components/match-club/mc-avatar"
 import { BottomNav, BottomNavSpacer } from "@/components/match-club/bottom-nav"
 import { StatusBar } from "@/components/match-club/status-bar"
 import { Bell } from "lucide-react"
@@ -31,11 +30,9 @@ export default function StudentHomePage() {
 
           {/* 右侧头像和登录 */}
           <Link href={isLoggedIn ? "/student/profile" : "/login"} className="flex flex-col items-center gap-1">
-            <MCAvatar 
-              size="xl" 
-              fallback={isLoggedIn ? userName : "?"} 
-              className="border-2 border-[#E5E5E5]"
-            />
+            <div className="w-20 h-20 rounded-full bg-[#F0F0F0] border-2 border-[#E5E5E5] flex items-center justify-center text-[24px] font-medium text-[#666666]">
+              {isLoggedIn ? userName.slice(0, 2) : "?"}
+            </div>
             <span className="text-[13px] text-[#666666]">
               {isLoggedIn ? userName : "登录"}
             </span>
@@ -71,7 +68,7 @@ export default function StudentHomePage() {
                   </MCButton>
                 </Link>
                 
-                <Link href="/student/match">
+                <Link href="/student/match-result">
                   <MCButton 
                     variant="ghost" 
                     fullWidth 

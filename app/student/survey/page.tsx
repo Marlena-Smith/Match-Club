@@ -491,8 +491,8 @@ export default function StudentSurveyPage() {
         {/* 状态栏 */}
         <StatusBar />
 
-        {/* 导航栏 */}
-        <header className="px-4 py-3 flex items-center gap-3">
+        {/* 导航栏 - 44px高度 */}
+        <header className="h-[44px] px-4 flex items-center gap-3">
           <button
             onClick={handleBack}
             className="w-9 h-9 flex items-center justify-center rounded-[4px] hover:bg-[#F5B70A]/10 active:scale-95 transition-all duration-200"

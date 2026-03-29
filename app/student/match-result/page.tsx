@@ -2,7 +2,7 @@
 
 import { ChevronLeft, Home, Compass, Heart, User } from "lucide-react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 
 // 模拟匹配结果数据
 const matchResults = [
@@ -36,6 +36,36 @@ const recommendedClubs = [
   "棋牌社", "羽毛球社", "汉服社", "桌游社",
   "篮球社", "足球社", "合唱团", "音乐协会",
 ]
+
+// iOS风格状态栏组件 - 44px高度
+function StatusBar() {
+  return (
+    <div className="w-full h-[44px] px-6 flex items-center justify-between bg-[#F9F6E5]">
+      <span className="text-[17px] font-semibold text-[#1A1A1A]">9:41</span>
+      <div className="flex items-center gap-1">
+        {/* 信号 */}
+        <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+          <rect x="0" y="7" width="3" height="5" rx="0.5" fill="#1A1A1A" />
+          <rect x="5" y="5" width="3" height="7" rx="0.5" fill="#1A1A1A" />
+          <rect x="10" y="2" width="3" height="10" rx="0.5" fill="#1A1A1A" />
+          <rect x="15" y="0" width="3" height="12" rx="0.5" fill="#1A1A1A" />
+        </svg>
+        {/* WiFi */}
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+          <path d="M8 2.4C10.7 2.4 13.1 3.5 14.8 5.3L16 4C14 1.8 11.2 0.5 8 0.5C4.8 0.5 2 1.8 0 4L1.2 5.3C2.9 3.5 5.3 2.4 8 2.4Z" fill="#1A1A1A" />
+          <path d="M8 5.9C9.9 5.9 11.6 6.7 12.8 8L14 6.7C12.5 5.1 10.4 4.1 8 4.1C5.6 4.1 3.5 5.1 2 6.7L3.2 8C4.4 6.7 6.1 5.9 8 5.9Z" fill="#1A1A1A" />
+          <path d="M8 9.4C9.1 9.4 10.1 9.9 10.8 10.7L12 9.4C10.9 8.2 9.5 7.5 8 7.5C6.5 7.5 5.1 8.2 4 9.4L5.2 10.7C5.9 9.9 6.9 9.4 8 9.4Z" fill="#1A1A1A" />
+        </svg>
+        {/* 电池 */}
+        <svg width="27" height="12" viewBox="0 0 27 12" fill="none">
+          <rect x="0.5" y="0.5" width="23" height="11" rx="2.5" stroke="#1A1A1A" strokeOpacity="0.35" />
+          <rect x="2" y="2" width="20" height="8" rx="1.5" fill="#1A1A1A" />
+          <path d="M25 4V8C26.1 7.5 26.1 4.5 25 4Z" fill="#1A1A1A" fillOpacity="0.4" />
+        </svg>
+      </div>
+    </div>
+  )
+}
 
 // 圆形进度条组件
 function CircularProgress({ 
@@ -152,15 +182,38 @@ function MatchCard({
   )
 }
 
+// 底部导航项数据
+const navItems = [
+  { label: "首页", href: "/student", icon: Home },
+  { label: "匹配", href: "/student/survey", icon: Compass },
+  { label: "收藏", href: "/student/favorites", icon: Heart },
+  { label: "我的", href: "/student/profile", icon: User },
+]
+
 export default function MatchResultPage() {
   const router = useRouter()
+  const pathname = usePathname()
 
   return (
     <div className="min-h-screen bg-[#F9F6E5] flex flex-col font-sans overflow-hidden">
+      {/* 隐藏滚动条的全局样式 */}
+      <style jsx global>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
+      
       <div className="max-w-[390px] w-full mx-auto flex-1 flex flex-col relative overflow-hidden">
         
-        {/* 顶部导航 - 只有回退按钮和标题 */}
-        <header className="px-4 pt-12 pb-3 flex items-center">
+        {/* 状态栏 - 44px */}
+        <StatusBar />
+        
+        {/* 顶部导航 - 44px 只有回退按钮和标题 */}
+        <header className="h-[44px] px-4 flex items-center">
           <button 
             onClick={() => router.back()}
             className="w-8 h-8 rounded-[4px] flex items-center justify-center hover:bg-[#F0F0F0] transition-colors"
@@ -168,19 +221,14 @@ export default function MatchResultPage() {
             <ChevronLeft className="w-6 h-6 text-[#666666]" />
           </button>
 
-          <h1 className="flex-1 text-center text-[18px] font-semibold text-[#1A1A1A]">匹配结果</h1>
+          <h1 className="flex-1 text-center text-[18px] font-semibold text-[#1A1A1A]">这些社团很适合你呢!</h1>
           
           {/* 占位，保持标题居中 */}
           <div className="w-8 h-8" />
         </header>
 
         {/* 主内容 - 隐藏滚动条 */}
-        <main className="flex-1 px-4 pb-20 overflow-y-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-          <style jsx>{`
-            main::-webkit-scrollbar {
-              display: none;
-            }
-          `}</style>
+        <main className="flex-1 px-4 pb-20 overflow-y-auto scrollbar-hide">
           
           {/* 匹配结果卡片 - 间距8px */}
           <section className="space-y-[8px]">
@@ -211,25 +259,34 @@ export default function MatchResultPage() {
           </section>
         </main>
 
-        {/* 底部导航 */}
-        <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#E5E5E5] py-2 px-6 z-50">
-          <div className="max-w-[390px] mx-auto flex justify-between items-center">
-            <Link href="/student" className="flex flex-col items-center gap-0.5 text-[#999999]">
-              <Home className="w-5 h-5" />
-              <span className="text-[11px]">首页</span>
-            </Link>
-            <Link href="/student/browse" className="flex flex-col items-center gap-0.5 text-[#999999]">
-              <Compass className="w-5 h-5" />
-              <span className="text-[11px]">浏览</span>
-            </Link>
-            <Link href="/student/favorites" className="flex flex-col items-center gap-0.5 text-[#999999]">
-              <Heart className="w-5 h-5" />
-              <span className="text-[11px]">我的</span>
-            </Link>
-            <Link href="/student/profile" className="flex flex-col items-center gap-0.5 text-[#999999]">
-              <User className="w-5 h-5" />
-              <span className="text-[11px]">我的</span>
-            </Link>
+        {/* 底部导航 - 固定在底部 */}
+        <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#E5E5E5] z-50">
+          <div className="max-w-[390px] mx-auto flex items-center justify-around h-14 px-4">
+            {navItems.map((item) => {
+              // 匹配结果页面属于"匹配"tab
+              const isActive = item.href === "/student/survey" 
+                ? (pathname === "/student/survey" || pathname === "/student/match-result")
+                : pathname === item.href
+              const Icon = item.icon
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex flex-col items-center justify-center flex-1 h-full transition-colors duration-200 ${
+                    isActive ? "text-[#F5B70A]" : "text-[#999999] hover:text-[#666666]"
+                  }`}
+                >
+                  <Icon
+                    className={`w-6 h-6 mb-0.5 transition-transform ${isActive ? "scale-105" : ""}`}
+                    strokeWidth={isActive ? 2.5 : 2}
+                  />
+                  <span className={`text-[11px] ${isActive ? "font-semibold" : ""}`}>
+                    {item.label}
+                  </span>
+                </Link>
+              )
+            })}
           </div>
         </nav>
       </div>

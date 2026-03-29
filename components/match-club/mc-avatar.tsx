@@ -14,14 +14,26 @@ interface MCAvatarProps {
   onClick?: () => void
 }
 
-// 头像尺寸样式映射 - 确保头像是正圆形
-const sizeStyles: Record<AvatarSize, { container: string; text: string; pixels: number }> = {
+// 头像尺寸样式映射
+const sizeStyles = {
   xs: { container: "w-6 h-6", text: "text-[11px]", pixels: 24 },
   sm: { container: "w-8 h-8", text: "text-[13px]", pixels: 32 },
   md: { container: "w-12 h-12", text: "text-[16px]", pixels: 48 },
   lg: { container: "w-16 h-16", text: "text-[20px]", pixels: 64 },
   xl: { container: "w-20 h-20", text: "text-[24px]", pixels: 80 },
   "2xl": { container: "w-24 h-24", text: "text-[28px]", pixels: 96 },
+} as const
+
+// 默认样式
+const defaultStyle = { container: "w-12 h-12", text: "text-[16px]", pixels: 48 }
+
+// 安全获取样式的函数
+function getSizeStyle(size: string | undefined) {
+  if (!size) return defaultStyle
+  if (size in sizeStyles) {
+    return sizeStyles[size as keyof typeof sizeStyles]
+  }
+  return defaultStyle
 }
 
 export function MCAvatar({
@@ -32,12 +44,7 @@ export function MCAvatar({
   className,
   onClick,
 }: MCAvatarProps) {
-  // 安全获取尺寸样式 - 始终使用默认值防止 undefined
-  const defaultStyle = { container: "w-12 h-12", text: "text-[16px]", pixels: 48 }
-  const currentStyle = (size && typeof size === "string" && sizeStyles[size as AvatarSize]) 
-    ? sizeStyles[size as AvatarSize] 
-    : defaultStyle
-  const { container, text, pixels } = currentStyle
+  const { container, text, pixels } = getSizeStyle(size)
   
   const getInitials = (name: string) => {
     return name.slice(0, 2).toUpperCase()
