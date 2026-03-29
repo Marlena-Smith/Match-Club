@@ -243,7 +243,7 @@ export default function MatchResultPage() {
               也可以看看这些...
             </h2>
             {/* 按钮与文字间距16px */}
-            <div className="flex flex-wrap gap-x-2 gap-y-1 mt-[16px]">
+            <div className="flex flex-wrap justify-center gap-x-2 gap-y-1 mt-[16px]">
               {recommendedClubs.map((clubName, index) => (
                 <Link
                   key={index}
