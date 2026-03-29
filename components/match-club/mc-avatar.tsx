@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 
-type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl"
+type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
 
 interface MCAvatarProps {
   src?: string | null
@@ -19,6 +19,7 @@ const sizeStyles: Record<AvatarSize, { container: string; text: string; pixels: 
   md: { container: "w-12 h-12", text: "text-[16px]", pixels: 48 },
   lg: { container: "w-16 h-16", text: "text-[20px]", pixels: 64 },
   xl: { container: "w-20 h-20", text: "text-[24px]", pixels: 80 },
+  "2xl": { container: "w-24 h-24", text: "text-[28px]", pixels: 96 },
 }
 
 export function MCAvatar({
