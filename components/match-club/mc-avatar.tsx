@@ -12,7 +12,7 @@ interface MCAvatarProps {
   onClick?: () => void
 }
 
-// 确保头像是正圆形
+// 头像尺寸样式映射 - 确保头像是正圆形
 const sizeStyles: Record<AvatarSize, { container: string; text: string; pixels: number }> = {
   xs: { container: "w-6 h-6", text: "text-[11px]", pixels: 24 },
   sm: { container: "w-8 h-8", text: "text-[13px]", pixels: 32 },
@@ -30,7 +30,9 @@ export function MCAvatar({
   className,
   onClick,
 }: MCAvatarProps) {
-  const { container, text, pixels } = sizeStyles[size]
+  // 安全获取尺寸样式，如果尺寸不存在则使用默认值
+  const sizeStyle = sizeStyles[size] || sizeStyles.md
+  const { container, text, pixels } = sizeStyle
   
   const getInitials = (name: string) => {
     return name.slice(0, 2).toUpperCase()
