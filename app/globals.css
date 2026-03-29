@@ -1,0 +1,242 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Match Club Design System */
+:root {
+  /* Brand Colors */
+  --mc-primary: #F5B70A;           /* 明黄 - 主色 */
+  --mc-primary-light: #FDD835;     /* 浅黄 */
+  --mc-primary-dark: #C99700;      /* 深黄 */
+  --mc-secondary: #0095B6;         /* 青蓝 - 次色 */
+  --mc-secondary-light: #26C6DA;   /* 浅青蓝 */
+  --mc-secondary-dark: #00778F;    /* 深青蓝 */
+  --mc-accent: #AE322A;            /* 红棕 - 点缀 */
+  --mc-accent-light: #D84A42;      /* 浅红棕 */
+  
+  /* Background Colors */
+  --mc-bg-warm: #F9F6E5;           /* 温暖米白 */
+  --mc-bg-cream: #FCEFE8;          /* 奶油白 */
+  --mc-bg-white: #FFFFFF;          /* 纯白 */
+  
+  /* Text Colors */
+  --mc-text-primary: #1A1A1A;      /* 主要文字 */
+  --mc-text-secondary: #666666;    /* 次要文字 */
+  --mc-text-muted: #999999;        /* 辅助文字 */
+  --mc-text-light: #FFFFFF;        /* 浅色文字 */
+  
+  /* Border & Divider */
+  --mc-border: #E5E5E5;
+  --mc-divider: #F0F0F0;
+  
+  /* Semantic Colors */
+  --mc-success: #4CAF50;
+  --mc-warning: #FF9800;
+  --mc-error: #F44336;
+  --mc-info: #2196F3;
+
+  /* shadcn/ui token overrides */
+  --background: oklch(0.98 0.01 90);
+  --foreground: oklch(0.15 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0 0);
+  --primary: oklch(0.78 0.16 85);         /* #F5B70A 明黄 */
+  --primary-foreground: oklch(0.15 0 0);
+  --secondary: oklch(0.58 0.12 220);      /* #0095B6 青蓝 */
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.96 0.01 90);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.50 0.18 25);          /* #AE322A 红棕 */
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.50 0.18 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.90 0.01 90);
+  --input: oklch(0.90 0.01 90);
+  --ring: oklch(0.78 0.16 85);
+  --radius: 0.75rem;
+  
+  /* Chart colors using brand palette */
+  --chart-1: oklch(0.78 0.16 85);         /* 明黄 */
+  --chart-2: oklch(0.58 0.12 220);        /* 青蓝 */
+  --chart-3: oklch(0.50 0.18 25);         /* 红棕 */
+  --chart-4: oklch(0.65 0.14 150);        /* 绿色 */
+  --chart-5: oklch(0.60 0.20 300);        /* 紫色 */
+  
+  /* Sidebar */
+  --sidebar: oklch(0.98 0.01 90);
+  --sidebar-foreground: oklch(0.15 0 0);
+  --sidebar-primary: oklch(0.78 0.16 85);
+  --sidebar-primary-foreground: oklch(0.15 0 0);
+  --sidebar-accent: oklch(0.58 0.12 220);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.90 0.01 90);
+  --sidebar-ring: oklch(0.78 0.16 85);
+}
+
+/* Dark mode - Match Club uses light mode primarily */
+.dark {
+  --background: oklch(0.15 0 0);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.18 0 0);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.18 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.78 0.16 85);
+  --primary-foreground: oklch(0.15 0 0);
+  --secondary: oklch(0.58 0.12 220);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.25 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.50 0.18 25);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.50 0.18 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.25 0 0);
+  --input: oklch(0.25 0 0);
+  --ring: oklch(0.78 0.16 85);
+}
+
+@theme inline {
+  /* Font families - 使用苹方字体，回退到系统字体 */
+  --font-sans: 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Monaco, monospace;
+  
+  /* Color tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Match Club custom colors */
+  --color-mc-primary: var(--mc-primary);
+  --color-mc-primary-light: var(--mc-primary-light);
+  --color-mc-primary-dark: var(--mc-primary-dark);
+  --color-mc-secondary: var(--mc-secondary);
+  --color-mc-secondary-light: var(--mc-secondary-light);
+  --color-mc-secondary-dark: var(--mc-secondary-dark);
+  --color-mc-accent: var(--mc-accent);
+  --color-mc-accent-light: var(--mc-accent-light);
+  --color-mc-bg-warm: var(--mc-bg-warm);
+  --color-mc-bg-cream: var(--mc-bg-cream);
+  --color-mc-text-primary: var(--mc-text-primary);
+  --color-mc-text-secondary: var(--mc-text-secondary);
+  --color-mc-text-muted: var(--mc-text-muted);
+  --color-mc-success: var(--mc-success);
+  --color-mc-warning: var(--mc-warning);
+  --color-mc-error: var(--mc-error);
+  --color-mc-info: var(--mc-info);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  /* Match Club Typography Scale */
+  /* 11px - Caption */
+  .text-mc-caption {
+    font-size: 0.6875rem;
+    line-height: 1.4;
+  }
+  /* 13px - Small */
+  .text-mc-small {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+  /* 16px - Body (default) */
+  .text-mc-body {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  /* 20px - Large */
+  .text-mc-large {
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
+  /* 24px - H4 */
+  .text-mc-h4 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+  /* 28px - H3 */
+  .text-mc-h3 {
+    font-size: 1.75rem;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  /* 36px - H2 */
+  .text-mc-h2 {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  /* 48px - H1 */
+  .text-mc-h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+    font-weight: 700;
+  }
+}
+
+/* Match Club Component Utilities */
+@layer utilities {
+  /* Mobile frame constraint (390x844) */
+  .mc-mobile-frame {
+    max-width: 390px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Standard horizontal padding */
+  .mc-px {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Spacing utilities */
+  .mc-gap-xs { gap: 0.25rem; }  /* 4px */
+  .mc-gap-sm { gap: 0.5rem; }   /* 8px */
+  .mc-gap-md { gap: 1rem; }     /* 16px */
+  .mc-gap-lg { gap: 1.5rem; }   /* 24px */
+  .mc-gap-xl { gap: 2.25rem; }  /* 36px */
+  .mc-gap-2xl { gap: 3rem; }    /* 48px */
+}
