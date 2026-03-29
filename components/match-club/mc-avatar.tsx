@@ -1,3 +1,5 @@
+"use client"
+
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 
@@ -22,9 +24,6 @@ const sizeStyles: Record<AvatarSize, { container: string; text: string; pixels: 
   "2xl": { container: "w-24 h-24", text: "text-[28px]", pixels: 96 },
 }
 
-// 默认尺寸
-const defaultSizeStyle = { container: "w-12 h-12", text: "text-[16px]", pixels: 48 }
-
 export function MCAvatar({
   src,
   alt = "头像",
@@ -33,9 +32,9 @@ export function MCAvatar({
   className,
   onClick,
 }: MCAvatarProps) {
-  // 安全获取尺寸样式，如果尺寸不存在则使用默认值
-  const sizeStyle = sizeStyles[size] ?? defaultSizeStyle
-  const { container, text, pixels } = sizeStyle
+  // 安全获取尺寸样式
+  const validSize = size && sizeStyles[size] ? size : "md"
+  const { container, text, pixels } = sizeStyles[validSize]
   
   const getInitials = (name: string) => {
     return name.slice(0, 2).toUpperCase()
