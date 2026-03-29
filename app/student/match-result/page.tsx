@@ -228,7 +228,7 @@ export default function MatchResultPage() {
         </header>
 
         {/* 主内容 - 隐藏滚动条 */}
-        <main className="flex-1 px-4 pt-16 pb-20 overflow-y-auto scrollbar-hide">
+        <main className="flex-1 px-4 pt-4 pb-20 overflow-y-auto scrollbar-hide">
 
           {/* 匹配结果卡片 - 间距8px */}
           <section className="space-y-[8px]">
