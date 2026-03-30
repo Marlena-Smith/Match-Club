@@ -841,7 +841,7 @@ export default function StudentSurveyPage() {
                   你喜欢什么规模的社团？
                 </p>
                 <p className="text-[13px] text-[#666666] mb-3">
-                  大家庭热闹，小团��亲密
+                  大家庭热闹，小团体亲密
                 </p>
                 <div className="grid grid-cols-2 gap-3">
                   {GROUP_OPTIONS.map((opt) => (
