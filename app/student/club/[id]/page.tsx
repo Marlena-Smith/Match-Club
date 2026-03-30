@@ -1,7 +1,7 @@
 "use client"
 
-// Club Poster Page - 社团宣传海报页
-import { ChevronLeft, Home, Compass, Heart, User, Bookmark } from "lucide-react"
+// Club Poster Page - 社团宣传海报页面
+import { ChevronLeft, Home, Compass, Heart, User, ThumbsUp, Star } from "lucide-react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 
@@ -65,38 +65,35 @@ const clubData = {
     {
       name: "x x 部",
       description: "是SUMA的招牌！主要负责平时的演出，可以寻找伙伴，组织自己的乐队，也可以独当一面。",
-      leader: "部长",
-      leaderName: "xxx"
+      leaderName: "张三"
     },
     {
       name: "x x 部",
       description: "是SUMA的招牌！主要负责平时的演出，可以寻找伙伴，组织自己的乐队，也可以独当一面。",
-      leader: "部长",
-      leaderName: "xxx"
+      leaderName: "李四"
     },
     {
       name: "x x 部",
       description: "是SUMA的招牌！主要负责平时的演出，可以寻找伙伴，组织自己的乐队，也可以独当一面。",
-      leader: "部长",
-      leaderName: "xxx"
+      leaderName: "王五"
     }
   ],
 
   // 社长信息
   president: {
-    name: "社长",
+    name: "陈社长",
     title: "社长登场！",
-    message: "如果你也被这些韵律的触动，点击心动。我在xx大学音乐协会，想要听到你的声音~"
+    description: "作为SUMA的掌舵人，我希望带领大家在音乐的海洋中遨游。我们不只是一个社团，更是一个温暖的大家庭。"
   },
 
   // 结语
-  conclusion: "如果你也被这些韵律的触动，点击心动。我在xx大学音乐协会，想要听到你的声音~"
+  conclusion: "如果你也被这些韵律所触动，点击心动。我在xx大学音乐协会，想要听到你的声音~"
 }
 
 // iOS风格状态栏组件 - 44px高度
 function StatusBar() {
   return (
-    <div className="w-full h-[44px] px-6 flex items-center justify-between bg-white">
+    <div className="w-full h-[44px] px-6 flex items-center justify-between bg-[#F9F6E5]">
       <span className="text-[17px] font-semibold text-[#1A1A1A]">9:41</span>
       <div className="flex items-center gap-1">
         <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
@@ -133,7 +130,7 @@ export default function ClubPosterPage() {
   const pathname = usePathname()
 
   return (
-    <div className="min-h-screen bg-white flex flex-col font-['PingFang_SC',-apple-system,sans-serif] overflow-hidden">
+    <div className="min-h-screen bg-[#F9F6E5] flex flex-col font-['PingFang_SC',-apple-system,sans-serif] overflow-hidden">
       {/* 隐藏滚动条的全局样式 */}
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar {
@@ -150,10 +147,10 @@ export default function ClubPosterPage() {
         <StatusBar />
 
         {/* 顶部导航 - 44px */}
-        <header className="h-[44px] px-4 flex items-center bg-white">
+        <header className="h-[44px] px-4 flex items-center bg-[#F9F6E5]">
           <button
             onClick={() => router.push("/student/match-result")}
-            className="w-8 h-8 flex items-center justify-center"
+            className="w-8 h-8 flex items-center justify-center rounded-[4px] hover:bg-[#F5B70A]/10 active:scale-95 transition-all"
           >
             <ChevronLeft className="w-6 h-6 text-[#1A1A1A]" />
           </button>
@@ -162,13 +159,13 @@ export default function ClubPosterPage() {
         </header>
 
         {/* 主内容区域 */}
-        <main className="flex-1 overflow-y-auto scrollbar-hide pb-[140px]">
-          {/* 社团头部信息 */}
-          <section className="px-4 py-4">
+        <main className="flex-1 overflow-y-auto scrollbar-hide pb-[140px] bg-white">
+          {/* 社团头部信息 - 带渐变背景 */}
+          <section className="px-4 py-4 bg-gradient-to-b from-[#F9F6E5] to-white">
             <div className="flex items-center gap-3">
               {/* 社团头像 */}
-              <div className="w-16 h-16 rounded-full bg-[#F0F0F0] flex items-center justify-center flex-shrink-0">
-                <span className="text-[20px] font-medium text-[#666666]">
+              <div className="w-16 h-16 rounded-full bg-white border-2 border-[#F5B70A] flex items-center justify-center flex-shrink-0 shadow-sm">
+                <span className="text-[20px] font-semibold text-[#F5B70A]">
                   {clubData.name.charAt(0)}
                 </span>
               </div>
@@ -181,7 +178,7 @@ export default function ClubPosterPage() {
                   {clubData.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="px-2 py-0.5 text-[13px] text-[#666666] bg-[#F5F5F5] rounded-[4px]"
+                      className="px-2 py-0.5 text-[13px] text-[#F5B70A] bg-[#F5B70A]/10 rounded-[4px] font-medium"
                     >
                       {tag}
                     </span>
@@ -203,7 +200,7 @@ export default function ClubPosterPage() {
 
             {/* 大合照 - 318x144 */}
             <div className="mt-[16px] flex justify-center">
-              <div className="w-[318px] h-[144px] bg-[#E5E5E5] rounded-[8px] flex items-center justify-center">
+              <div className="w-[318px] h-[144px] bg-[#E5E5E5] rounded-[8px] flex items-center justify-center border border-[#D5D5D5]">
                 <span className="text-[13px] text-[#999999]">（插入图片）大合照</span>
               </div>
             </div>
@@ -217,7 +214,7 @@ export default function ClubPosterPage() {
               {clubData.achievements.map((achievement, index) => (
                 <div
                   key={index}
-                  className="w-[340px] h-[144px] mx-auto bg-[#F9F9F9] rounded-[8px] p-[12px] flex gap-[12px]"
+                  className="w-[340px] h-[144px] mx-auto bg-white rounded-[8px] p-[12px] flex gap-[12px] border border-[#E5E5E5] shadow-sm"
                 >
                   {achievement.imagePosition === "left" ? (
                     <>
@@ -247,18 +244,18 @@ export default function ClubPosterPage() {
             </div>
 
             {/* 活动信息卡片 */}
-            <div className="mt-[8px] w-[340px] mx-auto bg-[#F9F9F9] rounded-[8px] p-[16px]">
+            <div className="mt-[8px] w-[340px] mx-auto bg-[#F5B70A]/5 rounded-[8px] p-[16px] border border-[#F5B70A]/20">
               <div className="grid grid-cols-3 gap-[8px] text-center">
                 <div>
-                  <p className="text-[13px] font-medium text-[#1A1A1A]">活动频率</p>
+                  <p className="text-[13px] font-semibold text-[#1A1A1A]">活动频率</p>
                   <p className="text-[13px] text-[#666666] mt-1">{clubData.activityInfo.frequency}</p>
                 </div>
                 <div>
-                  <p className="text-[13px] font-medium text-[#1A1A1A]">活动时间</p>
+                  <p className="text-[13px] font-semibold text-[#1A1A1A]">活动时间</p>
                   <p className="text-[13px] text-[#666666] mt-1">{clubData.activityInfo.time}</p>
                 </div>
                 <div>
-                  <p className="text-[13px] font-medium text-[#1A1A1A]">如何加入</p>
+                  <p className="text-[13px] font-semibold text-[#1A1A1A]">如何加入</p>
                   <p className="text-[13px] text-[#666666] mt-1">{clubData.activityInfo.howToJoin}</p>
                 </div>
               </div>
@@ -271,7 +268,7 @@ export default function ClubPosterPage() {
             <ul className="mt-[16px] space-y-2">
               {clubData.benefits.map((benefit, index) => (
                 <li key={index} className="flex items-start gap-2">
-                  <span className="text-[13px] text-[#1A1A1A] mt-0.5">•</span>
+                  <span className="text-[13px] text-[#F5B70A] mt-0.5">●</span>
                   <span className="text-[13px] text-[#666666] leading-relaxed">{benefit}</span>
                 </li>
               ))}
@@ -284,7 +281,7 @@ export default function ClubPosterPage() {
             <ul className="mt-[16px] space-y-2">
               {clubData.requirements.map((req, index) => (
                 <li key={index} className="flex items-start gap-2">
-                  <span className="text-[13px] text-[#1A1A1A] mt-0.5">•</span>
+                  <span className="text-[13px] text-[#F5B70A] mt-0.5">●</span>
                   <span className="text-[13px] text-[#666666] leading-relaxed">{req}</span>
                 </li>
               ))}
@@ -302,42 +299,43 @@ export default function ClubPosterPage() {
               {clubData.departments.map((dept, index) => (
                 <div
                   key={index}
-                  className="w-[318px] h-[102px] mx-auto bg-[#F9F9F9] rounded-[8px] p-[12px] flex gap-[12px]"
+                  className="w-[318px] h-[102px] mx-auto bg-white rounded-[8px] p-[12px] flex gap-[12px] border border-[#E5E5E5] shadow-sm"
                 >
                   <div className="flex-1">
                     <h4 className="text-[16px] font-semibold text-[#1A1A1A]">{dept.name}</h4>
                     <p className="text-[13px] text-[#666666] leading-relaxed mt-1 line-clamp-2">
                       {dept.description}
                     </p>
-                    <p className="text-[13px] text-[#999999] mt-1">{dept.leader}：{dept.leaderName}</p>
                   </div>
-                  {/* 部长头像 */}
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="w-[48px] h-[48px] rounded-full bg-[#E5E5E5] flex items-center justify-center">
-                      <span className="text-[13px] text-[#999999]">部长大头贴</span>
+                  {/* 部长头像 - 名字在"部长"下面居中对齐 */}
+                  <div className="flex flex-col items-center flex-shrink-0">
+                    <div className="w-[48px] h-[48px] rounded-full bg-[#F5B70A]/10 border border-[#F5B70A]/30 flex items-center justify-center">
+                      <span className="text-[16px] text-[#F5B70A] font-medium">{dept.leaderName.charAt(0)}</span>
                     </div>
-                    <span className="text-[11px] text-[#999999]">{dept.leader}</span>
+                    <span className="text-[11px] text-[#666666] mt-1">部长</span>
+                    <span className="text-[11px] text-[#999999]">{dept.leaderName}</span>
                   </div>
                 </div>
               ))}
             </div>
           </section>
 
-          {/* 社长登场 */}
+          {/* 社长登场 - 采用与部门卡片相同的格式 */}
           <section className="px-4 py-4">
             <h3 className="text-[16px] font-semibold text-[#1A1A1A]">{clubData.president.title}</h3>
-            <div className="mt-[16px] flex gap-[12px]">
+            <div className="mt-[16px] w-[318px] mx-auto bg-gradient-to-r from-[#F5B70A]/10 to-[#F5B70A]/5 rounded-[8px] p-[16px] flex gap-[12px] border border-[#F5B70A]/20 shadow-sm">
               <div className="flex-1">
                 <p className="text-[13px] text-[#666666] leading-relaxed">
-                  {clubData.president.message}
+                  {clubData.president.description}
                 </p>
               </div>
-              {/* 社长头像 */}
-              <div className="flex flex-col items-center gap-1 flex-shrink-0">
-                <div className="w-[64px] h-[64px] rounded-full bg-[#E5E5E5] flex items-center justify-center">
-                  <span className="text-[11px] text-[#999999]">社长靓照</span>
+              {/* 社长靓照 - 名字在"社长"下面居中对齐 */}
+              <div className="flex flex-col items-center flex-shrink-0">
+                <div className="w-[64px] h-[64px] rounded-full bg-[#F5B70A]/20 border-2 border-[#F5B70A] flex items-center justify-center shadow-sm">
+                  <span className="text-[20px] text-[#F5B70A] font-semibold">{clubData.president.name.charAt(0)}</span>
                 </div>
-                <span className="text-[13px] text-[#666666]">{clubData.president.name}：xxx</span>
+                <span className="text-[13px] text-[#666666] font-medium mt-1">社长</span>
+                <span className="text-[12px] text-[#999999]">{clubData.president.name}</span>
               </div>
             </div>
           </section>
@@ -353,27 +351,29 @@ export default function ClubPosterPage() {
           {/* 操作按钮 */}
           <section className="px-4 py-4">
             <div className="flex gap-4">
-              <button className="flex-1 h-[44px] border border-[#E5E5E5] rounded-[8px] text-[16px] font-medium text-[#666666] bg-white hover:bg-[#F5F5F5] transition-colors">
+              <button className="flex-1 h-[44px] border border-[#E5E5E5] rounded-[8px] text-[16px] font-medium text-[#666666] bg-white hover:bg-[#F5F5F5] active:scale-[0.98] transition-all shadow-sm">
                 再看看吧
               </button>
-              <button className="flex-1 h-[44px] border border-[#AE322A] rounded-[8px] text-[16px] font-medium text-[#AE322A] bg-white hover:bg-[#FFF5F5] transition-colors flex items-center justify-center gap-1">
-                <Heart className="w-4 h-4" />
+              <button className="flex-1 h-[44px] border-2 border-[#AE322A] rounded-[8px] text-[16px] font-semibold text-[#AE322A] bg-white hover:bg-[#FFF5F5] active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-sm">
+                <Heart className="w-5 h-5 fill-[#AE322A]" />
                 心动
               </button>
             </div>
           </section>
 
-          {/* 收藏和分享按钮 */}
-          <section className="px-4 pb-4 flex justify-center gap-8">
-            <button className="flex flex-col items-center gap-1">
-              <Bookmark className="w-6 h-6 text-[#999999]" />
+          {/* 点赞和收藏按钮 */}
+          <section className="px-4 pb-6 flex justify-center gap-12">
+            <button className="flex flex-col items-center gap-1 group">
+              <div className="w-10 h-10 rounded-full bg-[#F5F5F5] flex items-center justify-center group-hover:bg-[#F5B70A]/10 group-active:scale-95 transition-all">
+                <ThumbsUp className="w-5 h-5 text-[#999999] group-hover:text-[#F5B70A] transition-colors" />
+              </div>
+              <span className="text-[11px] text-[#999999] group-hover:text-[#F5B70A] transition-colors">点赞</span>
             </button>
-            <button className="flex flex-col items-center gap-1">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999999" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-                <polyline points="16 6 12 2 8 6" />
-                <line x1="12" y1="2" x2="12" y2="15" />
-              </svg>
+            <button className="flex flex-col items-center gap-1 group">
+              <div className="w-10 h-10 rounded-full bg-[#F5F5F5] flex items-center justify-center group-hover:bg-[#F5B70A]/10 group-active:scale-95 transition-all">
+                <Star className="w-5 h-5 text-[#999999] group-hover:text-[#F5B70A] transition-colors" />
+              </div>
+              <span className="text-[11px] text-[#999999] group-hover:text-[#F5B70A] transition-colors">收藏</span>
             </button>
           </section>
         </main>
