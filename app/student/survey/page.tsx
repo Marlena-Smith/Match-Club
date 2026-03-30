@@ -464,11 +464,13 @@ export default function StudentSurveyPage() {
       setTimeout(() => {
         setCurrentStep(currentStep + 1)
         setIsAnimating(false)
+        // 滚动到页面顶部
+        window.scrollTo(0, 0)
       }, 150)
-} else {
-    // 提交表单，跳转到匹配结果页
-    router.push("/student/match-result")
-  }
+    } else {
+      // 提交表单，跳转到匹配结果页
+      router.push("/student/match-result")
+    }
   }
 
   const handleBack = () => {
@@ -477,6 +479,8 @@ export default function StudentSurveyPage() {
       setTimeout(() => {
         setCurrentStep(currentStep - 1)
         setIsAnimating(false)
+        // 滚动到页面顶部
+        window.scrollTo(0, 0)
       }, 150)
     } else {
       router.push("/student")
@@ -649,7 +653,7 @@ export default function StudentSurveyPage() {
               {formData.interest_tag_primary && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <p className="text-[16px] font-medium text-[#1A1A1A] mb-1">
-                    具体��哪个方向？
+                    具�����哪个方向？
                   </p>
                   <p className="text-[13px] text-[#666666] mb-3">
                     让我们更精准地了解你
@@ -837,7 +841,7 @@ export default function StudentSurveyPage() {
                   你喜欢什么规模的社团？
                 </p>
                 <p className="text-[13px] text-[#666666] mb-3">
-                  大家庭热闹，小团体亲密
+                  大家庭热闹，小团��亲密
                 </p>
                 <div className="grid grid-cols-2 gap-3">
                   {GROUP_OPTIONS.map((opt) => (
