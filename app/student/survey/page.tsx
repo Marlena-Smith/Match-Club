@@ -116,8 +116,8 @@ const NEWBIE_TRAINING_OPTIONS = [
 ]
 
 const PHILOSOPHY_OPTIONS = [
-  { value: "freedom", label: "想要自由", desc: "松散管理，自主参与", icon: "🦋" },
-  { value: "supervision", label: "想要监督", desc: "有人督促，更有动力", icon: "📋" },
+  { value: "freedom", label: "想要自由", desc: "自主参与", icon: "🦋" },
+  { value: "supervision", label: "想要监督", desc: "更有动力", icon: "📋" },
 ]
 
 const SOCIAL_OPTIONS = [
