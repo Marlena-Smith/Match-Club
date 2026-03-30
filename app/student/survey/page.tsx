@@ -849,8 +849,8 @@ export default function StudentSurveyPage() {
                       key={opt.value}
                       onClick={() => updateFormData("group_preference", opt.value)}
                       className={cn(
-                        "h-20 rounded-[4px] border-2 transition-all duration-200",
-                        "flex flex-col items-center justify-center gap-1",
+                        "h-24 rounded-[4px] border-2 transition-all duration-200",
+                        "flex flex-col items-center justify-center gap-0.6",
                         formData.group_preference === opt.value
                           ? "border-[#F5B70A] bg-[#F5B70A] text-white shadow-md transform scale-[1.02]"
                           : "border-[#E5E5E5] bg-white text-[#1A1A1A] hover:border-[#F5B70A]/50"
