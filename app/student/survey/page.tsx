@@ -127,8 +127,8 @@ const SOCIAL_OPTIONS = [
 ]
 
 const GROUP_OPTIONS = [
-  { value: "big", label: "大家庭", desc: "20人以上，热闹", icon: "👨‍👩‍👧‍👦" },
-  { value: "small", label: "小团体", desc: "20人以下，亲密", icon: "👥" },
+  { value: "big", label: "大家庭", desc: "20人以上, 热闹", icon: "👨‍👩‍👧‍👦" },
+  { value: "small", label: "小团体", desc: "20人以下, 亲密", icon: "👥" },
 ]
 
 const GOAL_OPTIONS = [
@@ -155,7 +155,7 @@ function SurveyInput({
   helper?: string
 }) {
   const [isFocused, setIsFocused] = useState(false)
-  
+
   return (
     <div className="w-full">
       <label className="block text-[16px] font-medium text-[#1A1A1A] mb-2">
@@ -384,7 +384,7 @@ function FeeSelector({
   options: { value: string; label: string; desc: string }[]
 }) {
   const selectedIndex = options.findIndex((opt) => opt.value === value)
-  
+
   return (
     <div className="w-full">
       <label className="block text-[16px] font-medium text-[#1A1A1A] mb-3">
@@ -424,7 +424,7 @@ export default function StudentSurveyPage() {
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(1)
   const [isAnimating, setIsAnimating] = useState(false)
-  
+
   // 表单数据
   const [formData, setFormData] = useState({
     name: "",
@@ -532,8 +532,8 @@ export default function StudentSurveyPage() {
                   index + 1 < currentStep
                     ? "bg-[#F5B70A] text-white"
                     : index + 1 === currentStep
-                    ? "bg-[#F5B70A] text-white shadow-md scale-110"
-                    : "bg-[#E5E5E5] text-[#999999]"
+                      ? "bg-[#F5B70A] text-white shadow-md scale-110"
+                      : "bg-[#E5E5E5] text-[#999999]"
                 )}
               >
                 {index + 1 < currentStep ? (
@@ -566,8 +566,8 @@ export default function StudentSurveyPage() {
                 <div className="relative group">
                   <div className="absolute inset-0 bg-[#F5B70A]/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300" />
                   {formData.avatar ? (
-                    <img 
-                      src={formData.avatar} 
+                    <img
+                      src={formData.avatar}
                       alt="头像"
                       className="w-24 h-24 rounded-full object-cover relative border-3 border-white shadow-lg group-hover:scale-105 transition-transform duration-200"
                     />
@@ -653,7 +653,7 @@ export default function StudentSurveyPage() {
               {formData.interest_tag_primary && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <p className="text-[16px] font-medium text-[#1A1A1A] mb-1">
-                    具�����哪个方向？
+                    具体哪个方向？
                   </p>
                   <p className="text-[13px] text-[#666666] mb-3">
                     让我们更精准地了解你
@@ -887,7 +887,7 @@ export default function StudentSurveyPage() {
                   {GOAL_OPTIONS.map((goal) => {
                     const isSelected = formData.main_goals.includes(goal.id)
                     const priority = formData.main_goals.indexOf(goal.id) + 1
-                    
+
                     return (
                       <button
                         key={goal.id}
@@ -899,8 +899,8 @@ export default function StudentSurveyPage() {
                           isSelected
                             ? "border-transparent text-white shadow-md transform scale-[1.02]"
                             : formData.main_goals.length >= 3
-                            ? "border-[#E5E5E5] bg-white/50 text-[#999999] opacity-50 cursor-not-allowed"
-                            : "border-[#E5E5E5] bg-white text-[#1A1A1A] hover:border-[#F5B70A]/50"
+                              ? "border-[#E5E5E5] bg-white/50 text-[#999999] opacity-50 cursor-not-allowed"
+                              : "border-[#E5E5E5] bg-white text-[#1A1A1A] hover:border-[#F5B70A]/50"
                         )}
                         style={{
                           backgroundColor: isSelected ? goal.color : undefined,
