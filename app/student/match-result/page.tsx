@@ -247,7 +247,7 @@ export default function MatchResultPage() {
               {recommendedClubs.map((clubName, index) => (
                 <Link
                   key={index}
-                  href={`/student/browse?search=${encodeURIComponent(clubName)}`}
+                  href={`/student/club/${index + 1}`}
                 >
                   {/* 高度24px，圆角12px */}
                   <span className="inline-flex items-center px-2.5 h-[24px] text-[13px] text-[#666666] bg-white border border-[#E5E5E5] rounded-[12px] hover:bg-[#F5F5F5] transition-colors">
