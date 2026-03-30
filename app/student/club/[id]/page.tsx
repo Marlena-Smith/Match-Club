@@ -1,5 +1,6 @@
 "use client"
 
+// Club Poster Page - 社团宣传海报页
 import { ChevronLeft, Home, Compass, Heart, User, Bookmark } from "lucide-react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
@@ -43,7 +44,7 @@ const clubData = {
   activityInfo: {
     frequency: "小活动一周一次，大活动不定期刷新",
     time: "每周五或周日18:00",
-    howToJoin: "点击"心动"，我们会联系您~"
+    howToJoin: "点击「心动」，我们会联系您~"
   },
 
   // 加入我们你将获得
