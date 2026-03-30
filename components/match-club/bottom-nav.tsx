@@ -14,7 +14,7 @@ interface NavItem {
 // 学生端导航项
 const studentNavItems: NavItem[] = [
   { label: "首页", href: "/student", icon: Home },
-  { label: "浏览", href: "/student/browse", icon: Compass },
+  { label: "匹配", href: "/student/survey", icon: Compass },
   { label: "收藏", href: "/student/favorites", icon: Heart },
   { label: "我的", href: "/student/profile", icon: User },
 ]

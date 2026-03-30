@@ -4,7 +4,6 @@
 export { Tag } from "./tag"
 export { MCButton } from "./mc-button"
 export { MCCard, MCCardHeader, MCCardTitle, MCCardContent, MCCardFooter, MCInnerCard } from "./mc-card"
-export { MCAvatar } from "./mc-avatar"
 export { MCInput, MCTextarea } from "./mc-input"
 export { MCSelect } from "./mc-select"
 
