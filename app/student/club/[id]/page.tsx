@@ -8,13 +8,13 @@ import { useRouter, usePathname } from "next/navigation"
 const clubData = {
   id: "1",
   name: "SUMA",
-  slogan: "上大音协，等你加入！",
+  slogan: "XX音协，等你加入！",
   avatar: null,
   tags: ["音乐", "唱歌", "摇滚", "吉他"],
-  
+
   // 我们是谁
-  aboutUs: "这里是一群热爱音乐并值得信任的朋友。在音乐的领域里，我们不断探索，找到属于自己的火花。简介，讲讲历史荣誉。",
-  
+  aboutUs: "（简介）这里是一群热爱音乐并值得信任的朋友。在音乐的领域里，我们不断探索，找到属于自己的火花。历史渊源巴拉巴拉，今天，SUMA已经巴拉拉巴拉",
+
   // 光辉事迹
   achievements: [
     {
@@ -38,14 +38,14 @@ const clubData = {
       imagePosition: "right"
     }
   ],
-  
+
   // 活动信息
   activityInfo: {
     frequency: "小活动一周一次，大活动不定期刷新",
     time: "每周五或周日18:00",
     howToJoin: "点击"心动"，我们会联系您~"
   },
-  
+
   // 加入我们你将获得
   benefits: [
     "拥有一群热爱音乐并值得信任的朋友；",
@@ -53,12 +53,12 @@ const clubData = {
     "不定期掉落去音乐节当志愿者的机会、免费观看livehouse的机会；",
     "还有更多惊喜等你发现！"
   ],
-  
+
   // 我们希望你
   requirements: [
     "永做自己！"
   ],
-  
+
   // 组织构成
   departments: [
     {
@@ -80,14 +80,14 @@ const clubData = {
       leaderName: "xxx"
     }
   ],
-  
+
   // 社长信息
   president: {
     name: "社长",
     title: "社长登场！",
     message: "如果你也被这些韵律的触动，点击心动。我在xx大学音乐协会，想要听到你的声音~"
   },
-  
+
   // 结语
   conclusion: "如果你也被这些韵律的触动，点击心动。我在xx大学音乐协会，想要听到你的声音~"
 }
@@ -171,7 +171,7 @@ export default function ClubPosterPage() {
                   {clubData.name.charAt(0)}
                 </span>
               </div>
-              
+
               <div className="flex-1">
                 <h2 className="text-[20px] font-semibold text-[#1A1A1A]">{clubData.name}</h2>
                 <p className="text-[13px] text-[#666666] mt-1">{clubData.slogan}</p>
@@ -199,7 +199,7 @@ export default function ClubPosterPage() {
             <p className="text-[13px] text-[#666666] leading-relaxed mt-[16px]">
               {clubData.aboutUs}
             </p>
-            
+
             {/* 大合照 - 318x144 */}
             <div className="mt-[16px] flex justify-center">
               <div className="w-[318px] h-[144px] bg-[#E5E5E5] rounded-[8px] flex items-center justify-center">
@@ -211,7 +211,7 @@ export default function ClubPosterPage() {
           {/* 我们的光辉事迹 */}
           <section className="px-4 py-4">
             <h3 className="text-[16px] font-semibold text-[#1A1A1A]">我们的光辉事迹</h3>
-            
+
             <div className="mt-[16px] space-y-[8px]">
               {clubData.achievements.map((achievement, index) => (
                 <div
@@ -296,7 +296,7 @@ export default function ClubPosterPage() {
             <p className="text-[13px] text-[#666666] mt-[16px] leading-relaxed">
               SUMA目前由xx部、宣传部、外联部、后勤部联合组成。
             </p>
-            
+
             <div className="mt-[16px] space-y-[8px]">
               {clubData.departments.map((dept, index) => (
                 <div
@@ -387,9 +387,8 @@ export default function ClubPosterPage() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex flex-col items-center justify-center flex-1 h-full transition-colors duration-200 ${
-                    isActive ? "text-[#F5B70A]" : "text-[#999999] hover:text-[#666666]"
-                  }`}
+                  className={`flex flex-col items-center justify-center flex-1 h-full transition-colors duration-200 ${isActive ? "text-[#F5B70A]" : "text-[#999999] hover:text-[#666666]"
+                    }`}
                 >
                   <Icon
                     className={`w-6 h-6 mb-0.5 transition-transform ${isActive ? "scale-105" : ""}`}
