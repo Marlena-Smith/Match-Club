@@ -1,11 +1,12 @@
 "use client"
 
 // Club Poster Page - 社团宣传海报详情页
-import { ChevronLeft, Home, Compass, Heart, User, ThumbsUp, Star } from "lucide-react"
+import { ChevronLeft, ThumbsUp, Star } from "lucide-react"
 import Link from "next/link"
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useFavorites } from "@/contexts/favorites-context"
+import { BottomNav, BottomNavSpacer } from "@/components/match-club/bottom-nav"
 
 // 模拟社团数据
 const clubData = {
@@ -119,13 +120,7 @@ function StatusBar() {
   )
 }
 
-// 底部导航项数据
-const navItems = [
-  { label: "首页", href: "/student", icon: Home },
-  { label: "匹配", href: "/student/survey", icon: Compass },
-  { label: "收藏", href: "/student/favorites", icon: Heart },
-  { label: "我的", href: "/student/profile", icon: User },
-]
+
 
 export default function ClubPosterPage() {
   const router = useRouter()
@@ -410,32 +405,12 @@ export default function ClubPosterPage() {
           </section>
         </main>
 
-        {/* 底部导航 - 固定在底部 */}
-        <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#E5E5E5] z-50">
-          <div className="max-w-[390px] mx-auto flex items-center justify-around h-14 px-4">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href
-              const Icon = item.icon
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`flex flex-col items-center justify-center flex-1 h-full transition-colors duration-200 ${isActive ? "text-[#F5B70A]" : "text-[#999999] hover:text-[#666666]"
-                    }`}
-                >
-                  <Icon
-                    className={`w-6 h-6 mb-0.5 transition-transform ${isActive ? "scale-105" : ""}`}
-                    strokeWidth={isActive ? 2.5 : 2}
-                  />
-                  <span className={`text-[11px] ${isActive ? "font-semibold" : ""}`}>
-                    {item.label}
-                  </span>
-                </Link>
-              )
-            })}
-          </div>
-        </nav>
+        {/* 底部导航栏占位 */}
+        <BottomNavSpacer />
       </div>
+
+      {/* 底部导航栏 */}
+      <BottomNav type="student" />
     </div>
   )
 }
