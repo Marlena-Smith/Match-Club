@@ -7,7 +7,7 @@ import { ChevronLeft } from "lucide-react"
 // iOS风格状态栏组件 - 44px高度
 function StatusBar() {
   return (
-    <div className="w-full h-[44px] px-6 flex items-center justify-between bg-white">
+    <div className="w-full h-[44px] px-6 flex items-center justify-between bg-[#F9F6E5]">
       <span className="text-[17px] font-semibold text-[#1A1A1A]">9:41</span>
       <div className="flex items-center gap-1">
         <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
@@ -118,7 +118,7 @@ export default function StudentApplicationPage() {
   const studentData = mockStudentData
 
   return (
-    <div className="min-h-screen bg-white flex flex-col font-['PingFang_SC',-apple-system,sans-serif]">
+    <div className="min-h-screen bg-[#F9F6E5] flex flex-col font-['PingFang_SC',-apple-system,sans-serif]">
       {/* 隐藏滚动条 */}
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar {
@@ -135,7 +135,7 @@ export default function StudentApplicationPage() {
         <StatusBar />
 
         {/* 顶部导航 - 44px */}
-        <header className="h-[44px] px-4 flex items-center bg-white border-b border-[#E5E5E5]">
+        <header className="h-[44px] px-4 flex items-center bg-[#F9F6E5]">
           <button
             onClick={() => router.back()}
             className="w-8 h-8 flex items-center justify-center rounded-[4px] hover:bg-[#F5F5F5] active:scale-95 transition-all"
@@ -147,9 +147,9 @@ export default function StudentApplicationPage() {
         </header>
 
         {/* 主内容区域 */}
-        <main className="flex-1 overflow-y-auto scrollbar-hide pb-8 bg-[#F5F5F5]">
+        <main className="flex-1 overflow-y-auto scrollbar-hide pb-8 bg-[#F9F6E5]">
           {/* 学生头像和姓名 */}
-          <section className="px-4 py-6 bg-white">
+          <section className="mx-4 mt-4 px-4 py-6 bg-white rounded-[8px] border border-[#E5E5E5]">
             <div className="flex items-center gap-4">
               {/* 大头贴 */}
               <div 
@@ -173,10 +173,10 @@ export default function StudentApplicationPage() {
             </div>
           </section>
 
-          <div className="h-2 bg-[#F5F5F5]" />
+          <div className="h-3 bg-[#F9F6E5]" />
 
           {/* 基础信息 */}
-          <section className="px-4 py-4 bg-white">
+          <section className="mx-4 px-4 py-4 bg-white rounded-[8px] border border-[#E5E5E5]">
             <h3 className="text-[16px] font-semibold text-[#1A1A1A] mb-4">基础信息</h3>
             
             <div className="space-y-3">
@@ -199,10 +199,10 @@ export default function StudentApplicationPage() {
             </div>
           </section>
 
-          <div className="h-2 bg-[#F5F5F5]" />
+          <div className="h-3 bg-[#F9F6E5]" />
 
           {/* 兴趣标签 */}
-          <section className="px-4 py-4 bg-white">
+          <section className="mx-4 px-4 py-4 bg-white rounded-[8px] border border-[#E5E5E5]">
             <h3 className="text-[16px] font-semibold text-[#1A1A1A] mb-4">兴趣标签</h3>
             
             <div className="flex flex-wrap gap-2">
@@ -217,10 +217,10 @@ export default function StudentApplicationPage() {
             </div>
           </section>
 
-          <div className="h-2 bg-[#F5F5F5]" />
+          <div className="h-3 bg-[#F9F6E5]" />
 
           {/* 参与意愿 */}
-          <section className="px-4 py-4 bg-white">
+          <section className="mx-4 px-4 py-4 bg-white rounded-[8px] border border-[#E5E5E5]">
             <h3 className="text-[16px] font-semibold text-[#1A1A1A] mb-4">参与意愿</h3>
             
             <div className="space-y-3">
@@ -251,10 +251,10 @@ export default function StudentApplicationPage() {
             </div>
           </section>
 
-          <div className="h-2 bg-[#F5F5F5]" />
+          <div className="h-3 bg-[#F9F6E5]" />
 
           {/* 社交风格 */}
-          <section className="px-4 py-4 bg-white">
+          <section className="mx-4 px-4 py-4 bg-white rounded-[8px] border border-[#E5E5E5]">
             <h3 className="text-[16px] font-semibold text-[#1A1A1A] mb-4">社交风格</h3>
             
             <div className="space-y-3">
@@ -269,10 +269,10 @@ export default function StudentApplicationPage() {
             </div>
           </section>
 
-          <div className="h-2 bg-[#F5F5F5]" />
+          <div className="h-3 bg-[#F9F6E5]" />
 
           {/* 目标期望 */}
-          <section className="px-4 py-4 bg-white">
+          <section className="mx-4 px-4 py-4 bg-white rounded-[8px] border border-[#E5E5E5]">
             <h3 className="text-[16px] font-semibold text-[#1A1A1A] mb-4">目标期望</h3>
             
             <div className="flex flex-wrap gap-2">
@@ -287,10 +287,10 @@ export default function StudentApplicationPage() {
             </div>
           </section>
 
-          <div className="h-2 bg-[#F5F5F5]" />
+          <div className="h-3 bg-[#F9F6E5]" />
 
           {/* 自我推荐 */}
-          <section className="px-4 py-4 bg-white">
+          <section className="mx-4 px-4 py-4 bg-white rounded-[8px] border border-[#E5E5E5]">
             <h3 className="text-[16px] font-semibold text-[#1A1A1A] mb-4">自我推荐</h3>
             
             <div className="p-3 bg-[#F5F5F5] rounded-[8px]">

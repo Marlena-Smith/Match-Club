@@ -9,7 +9,7 @@ import { BottomNav, BottomNavSpacer } from "@/components/match-club/bottom-nav"
 // iOS风格状态栏组件 - 44px高度
 function StatusBar() {
   return (
-    <div className="w-full h-[44px] px-6 flex items-center justify-between bg-white">
+    <div className="w-full h-[44px] px-6 flex items-center justify-between bg-[#F9F6E5]">
       <span className="text-[17px] font-semibold text-[#1A1A1A]">9:41</span>
       <div className="flex items-center gap-1">
         <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
@@ -117,7 +117,7 @@ function ApplicationCard({
   return (
     <Link 
       href={`/club/application/${application.id}`}
-      className="flex items-center gap-2 bg-white"
+      className="flex items-center gap-2 bg-white rounded-[8px] border border-[#E5E5E5]"
       style={{
         width: "340px",
         height: "89px",
@@ -245,7 +245,7 @@ export default function ClubMessagePage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col font-['PingFang_SC',-apple-system,sans-serif]">
+    <div className="min-h-screen bg-[#F9F6E5] flex flex-col font-['PingFang_SC',-apple-system,sans-serif]">
       {/* 隐藏滚动条 */}
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar {
@@ -262,7 +262,7 @@ export default function ClubMessagePage() {
         <StatusBar />
 
         {/* 页面标题 - 居中 */}
-        <header className="flex items-center justify-center bg-white" style={{ height: "44px" }}>
+        <header className="flex items-center justify-center bg-[#F9F6E5]" style={{ height: "44px" }}>
           <h1 
             className="text-[#1A1A1A]"
             style={{ 
@@ -276,12 +276,12 @@ export default function ClubMessagePage() {
         </header>
 
         {/* 主内容区域 */}
-        <main className="flex-1 overflow-y-auto scrollbar-hide bg-white">
+        <main className="flex-1 overflow-y-auto scrollbar-hide bg-[#F9F6E5]">
           {/* 待处理区域 */}
           <section>
             {/* 待处理标题 - 上下间距24/16px，中粗体16号 */}
             <h2 
-              className="text-[#1A1A1A] bg-white"
+              className="text-[#1A1A1A] bg-[#F9F6E5]"
               style={{ 
                 fontFamily: "'PingFang SC', -apple-system, sans-serif",
                 fontSize: "16px",
@@ -325,7 +325,7 @@ export default function ClubMessagePage() {
           <section>
             {/* 已处理标题 - 上下间距24/16px */}
             <h2 
-              className="text-[#1A1A1A] bg-white"
+              className="text-[#1A1A1A] bg-[#F9F6E5]"
               style={{ 
                 fontFamily: "'PingFang SC', -apple-system, sans-serif",
                 fontSize: "16px",

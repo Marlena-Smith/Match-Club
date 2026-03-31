@@ -17,7 +17,7 @@ const clubData = {
   tags: ["音乐", "唱歌", "摇滚", "吉他"],
 
   // 我们是谁
-  aboutUs: "(简介)这里是一群热爱音乐并值得信任的朋友。在音乐的领域里，我们不断探索，找到属于自己的火花。历史渊源巴拉巴拉，今天，SUMA已经巴拉拉巴拉",
+  aboutUs: "[简介] 这里是一群热爱音乐并值得信任的朋友。在音乐的领域里，我们不断探索，找到属于自己的火花。历史渊源巴拉巴拉，今天，SUMA已经巴拉拉巴拉",
 
   // 光辉事迹
   achievements: [
@@ -235,7 +235,7 @@ export default function ClubPosterPage() {
                 >
                   {achievement.imagePosition === "left" ? (
                     <>
-                      {/* 图片在左 */}
+                      {/* 图片在�� */}
                       <div className="w-[100px] h-[120px] bg-[#E5E5E5] rounded-[4px] flex-shrink-0" />
                       <div className="flex-1 flex flex-col">
                         <h4 className="text-[16px] font-semibold text-[#1A1A1A]">{achievement.title}</h4>
