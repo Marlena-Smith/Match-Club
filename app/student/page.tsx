@@ -1,5 +1,6 @@
 "use client"
 
+// Student Home Page - 百团大战首页
 import { useState, useRef } from "react"
 import { BottomNav, BottomNavSpacer } from "@/components/match-club/bottom-nav"
 import { StatusBar } from "@/components/match-club/status-bar"
@@ -106,8 +107,7 @@ export default function StudentHomePage() {
         </header>
 
         {/* 主内容区域 */}
-        <main className="flex-1 px-4 overflow-y-auto pb-4" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-          <style jsx>{`main::-webkit-scrollbar { display: none; }`}</style>
+        <main className="flex-1 px-4 overflow-y-auto pb-4 hide-scrollbar">
           
           {/* 热门社团 */}
           <section className="mt-4">
@@ -117,11 +117,7 @@ export default function StudentHomePage() {
             {/* 大卡片容器 341x134px */}
             <div className="w-[341px] h-[134px] bg-white rounded-[8px] border border-[#E5E5E5] p-3 overflow-hidden">
               {/* 小卡片横向滚动容器 */}
-              <div 
-                className="flex gap-2 overflow-x-auto pb-1" 
-                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              >
-                <style jsx>{`div::-webkit-scrollbar { display: none; }`}</style>
+              <div className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
                 {hotClubs.map((club) => (
                   <Link
                     key={club.id}
@@ -148,11 +144,7 @@ export default function StudentHomePage() {
             {/* 大卡片容器 341x134px */}
             <div className="w-[341px] h-[134px] bg-white rounded-[8px] border border-[#E5E5E5] p-3 overflow-hidden">
               {/* 小卡片横向滚动容器 */}
-              <div 
-                className="flex gap-2 overflow-x-auto pb-1" 
-                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              >
-                <style jsx>{`div::-webkit-scrollbar { display: none; }`}</style>
+              <div className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
                 {matchedClubs.map((club) => (
                   <Link
                     key={club.id}
