@@ -124,7 +124,6 @@ function StatusBar() {
 
 export default function ClubPosterPage() {
   const router = useRouter()
-  const pathname = usePathname()
   const { addFavorite, removeFavorite, isFavorite } = useFavorites()
   const [isLiked, setIsLiked] = useState(false)
 
@@ -352,7 +351,7 @@ export default function ClubPosterPage() {
                 <div className="w-[64px] h-[64px] rounded-full bg-[#F5B70A]/20 border-2 border-[#F5B70A] flex items-center justify-center shadow-sm">
                   <span className="text-[20px] text-[#F5B70A] font-semibold">{clubData.president.name.charAt(0)}</span>
                 </div>
-                <span className="text-[13px] text-[#666666] font-medium mt-1">社长</span>
+                <span className="text-[13px] text-[#666666] font-medium mt-1">社���</span>
                 <span className="text-[12px] text-[#999999]">{clubData.president.name}</span>
               </div>
             </div>
