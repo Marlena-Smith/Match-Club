@@ -159,16 +159,7 @@ export default function ApplyPage() {
             <ChevronLeft className="w-6 h-6 text-[#1A1A1A]" />
           </button>
           <h1 className="flex-1 text-center text-[16px] font-semibold text-[#1A1A1A]">入社申请</h1>
-          <button
-            onClick={handleSave}
-            className={`w-8 h-8 flex items-center justify-center rounded-[4px] transition-all ${isSaved ? "bg-[#4CAF50]/10" : "hover:bg-[#F5B70A]/10 active:scale-95"}`}
-          >
-            {isSaved ? (
-              <Check className="w-5 h-5 text-[#4CAF50]" />
-            ) : (
-              <Save className="w-5 h-5 text-[#666666]" />
-            )}
-          </button>
+          <div className="w-8 h-8"></div>
         </header>
 
         {/* 主内容区域 */}

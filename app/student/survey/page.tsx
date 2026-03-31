@@ -26,6 +26,16 @@ const GENDER_OPTIONS = [
   { value: "other", label: "其他", icon: "🌈" },
 ]
 
+const GRADE_OPTIONS = [
+  { value: "freshman", label: "大一" },
+  { value: "sophomore", label: "大二" },
+  { value: "junior", label: "大三" },
+  { value: "senior", label: "大四" },
+  { value: "master1", label: "研一" },
+  { value: "master2", label: "研二" },
+  { value: "master3", label: "研三" },
+]
+
 const PRIMARY_TAG_OPTIONS = [
   { value: "sports", label: "体育", icon: "🏀" },
   { value: "art", label: "艺术", icon: "🎨" },
@@ -425,12 +435,14 @@ export default function StudentSurveyPage() {
   const [currentStep, setCurrentStep] = useState(1)
   const [isAnimating, setIsAnimating] = useState(false)
 
-  // 表单数据
+// 表单数据
   const [formData, setFormData] = useState({
-    name: "",
-    nickname: "",
-    gender: "",
-    avatar: "",
+  name: "",
+  nickname: "",
+  gender: "",
+  grade: "",
+  college: "",
+  avatar: "",
     interest_tag_primary: "",
     interest_tag_secondary: "",
     interest_tag_custom: "",
@@ -621,6 +633,21 @@ export default function StudentSurveyPage() {
                   ))}
                 </div>
               </div>
+
+              <SurveySelect
+                label="年级"
+                placeholder="请选择年级"
+                options={GRADE_OPTIONS}
+                value={formData.grade}
+                onChange={(v) => updateFormData("grade", v)}
+              />
+
+              <SurveyInput
+                label="学院"
+                placeholder="请输入所在学院"
+                value={formData.college}
+                onChange={(v) => updateFormData("college", v)}
+              />
             </div>
           )}
 
