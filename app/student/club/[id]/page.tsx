@@ -1,7 +1,7 @@
 "use client"
 
 // Club Poster Page - 社团宣传海报详情页
-import { ChevronLeft, ThumbsUp, Star } from "lucide-react"
+import { ChevronLeft, ThumbsUp, Star, Heart } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
