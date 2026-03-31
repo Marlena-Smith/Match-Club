@@ -83,6 +83,7 @@ function SwipeableCard({
   const startXRef = useRef(0)
   const currentXRef = useRef(0)
 
+  // 触摸事件处理
   const handleTouchStart = (e: React.TouchEvent) => {
     startXRef.current = e.touches[0].clientX
     currentXRef.current = translateX
@@ -98,11 +99,46 @@ function SwipeableCard({
 
   const handleTouchEnd = () => {
     setIsDragging(false)
-    // 如果滑动超过40px，显示删除按钮
     if (translateX < -40) {
       setTranslateX(-80)
     } else {
       setTranslateX(0)
+    }
+  }
+
+  // 鼠标事件处理（桌面端支持）
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault()
+    startXRef.current = e.clientX
+    currentXRef.current = translateX
+    setIsDragging(true)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return
+    const diff = e.clientX - startXRef.current
+    const newTranslate = Math.min(0, Math.max(-80, currentXRef.current + diff))
+    setTranslateX(newTranslate)
+  }
+
+  const handleMouseUp = () => {
+    if (!isDragging) return
+    setIsDragging(false)
+    if (translateX < -40) {
+      setTranslateX(-80)
+    } else {
+      setTranslateX(0)
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      setIsDragging(false)
+      if (translateX < -40) {
+        setTranslateX(-80)
+      } else {
+        setTranslateX(0)
+      }
     }
   }
 
@@ -111,13 +147,20 @@ function SwipeableCard({
     setTranslateX(0)
   }
 
+  // 点击跳转时，如果正在滑动则阻止跳转
+  const handleClick = (e: React.MouseEvent) => {
+    if (Math.abs(translateX) > 5) {
+      e.preventDefault()
+    }
+  }
+
   return (
     <div className="relative overflow-hidden rounded-[8px]">
       {/* 删除按钮背景 */}
       <div className="absolute right-0 top-0 bottom-0 w-[80px] bg-[#AE322A] flex items-center justify-center">
         <button
           onClick={handleDelete}
-          className="text-white text-[14px] font-medium"
+          className="text-white text-[14px] font-medium hover:bg-[#9A2A24] w-full h-full transition-colors"
         >
           删除
         </button>
@@ -126,7 +169,7 @@ function SwipeableCard({
       {/* 卡片内容 */}
       <div
         ref={cardRef}
-        className="relative bg-white rounded-[8px] p-[8px] border border-[#E5E5E5] transition-transform"
+        className="relative bg-white rounded-[8px] p-[8px] border border-[#E5E5E5] cursor-grab active:cursor-grabbing select-none"
         style={{
           transform: `translateX(${translateX}px)`,
           transition: isDragging ? "none" : "transform 0.2s ease-out"
@@ -134,10 +177,16 @@ function SwipeableCard({
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
       >
         <Link
           href={`/student/club/${club.id}`}
           className="flex items-center gap-[8px]"
+          onClick={handleClick}
+          draggable={false}
         >
           <SimpleAvatar name={club.name} size={48} className="flex-shrink-0" />
 
