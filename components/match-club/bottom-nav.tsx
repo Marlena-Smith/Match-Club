@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Compass, Heart, User, FileText, Image, Users } from "lucide-react"
+import { Home, Compass, User, FileText, Image, Users } from "lucide-react"
 
 interface NavItem {
   label: string
@@ -11,11 +11,10 @@ interface NavItem {
   icon: React.ElementType
 }
 
-// 学生端导航项
+// 学生端导航项 - 3个tab：百团大战、个人画像、我的
 const studentNavItems: NavItem[] = [
-  { label: "首页", href: "/student", icon: Home },
-  { label: "匹配", href: "/student/survey", icon: Compass },
-  { label: "收藏", href: "/student/favorites", icon: Heart },
+  { label: "百团大战", href: "/student", icon: Home },
+  { label: "个人画像", href: "/student/survey", icon: Compass },
   { label: "我的", href: "/student/profile", icon: User },
 ]
 

@@ -1,9 +1,11 @@
 "use client"
 
-// Club Poster Page - 社团宣传海报页面
+// Club Poster Page - 社团宣传海报详情页
 import { ChevronLeft, Home, Compass, Heart, User, ThumbsUp, Star } from "lucide-react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
+import { useState } from "react"
+import { useFavorites } from "@/contexts/favorites-context"
 
 // 模拟社团数据
 const clubData = {
@@ -128,6 +130,27 @@ const navItems = [
 export default function ClubPosterPage() {
   const router = useRouter()
   const pathname = usePathname()
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites()
+  const [isLiked, setIsLiked] = useState(false)
+
+  const clubIsFavorite = isFavorite(clubData.id)
+
+  const handleToggleFavorite = () => {
+    if (clubIsFavorite) {
+      removeFavorite(clubData.id)
+    } else {
+      addFavorite({
+        id: clubData.id,
+        name: clubData.name,
+        avatar: clubData.avatar,
+        tags: clubData.tags
+      })
+    }
+  }
+
+  const handleToggleLike = () => {
+    setIsLiked(!isLiked)
+  }
 
   return (
     <div className="min-h-screen bg-[#F9F6E5] flex flex-col font-['PingFang_SC',-apple-system,sans-serif] overflow-hidden">
@@ -243,7 +266,7 @@ export default function ClubPosterPage() {
               ))}
             </div>
 
-            {/* 活动信息卡片 */}
+            {/* 活动信息��片 */}
             <div className="mt-[8px] w-[340px] mx-auto bg-[#F5B70A]/5 rounded-[8px] p-[16px] border border-[#F5B70A]/20">
               <div className="grid grid-cols-3 gap-[8px] text-center">
                 <div>
@@ -354,7 +377,10 @@ export default function ClubPosterPage() {
               <button className="flex-1 h-[44px] border border-[#E5E5E5] rounded-[8px] text-[16px] font-medium text-[#666666] bg-white hover:bg-[#F5F5F5] active:scale-[0.98] transition-all shadow-sm">
                 再看看吧
               </button>
-              <button className="flex-1 h-[44px] border-2 border-[#AE322A] rounded-[8px] text-[16px] font-semibold text-[#AE322A] bg-white hover:bg-[#FFF5F5] active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-sm">
+              <button
+                onClick={() => router.push(`/student/apply/${clubData.id}`)}
+                className="flex-1 h-[44px] border-2 border-[#AE322A] rounded-[8px] text-[16px] font-semibold text-[#AE322A] bg-white hover:bg-[#FFF5F5] active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-sm"
+              >
                 <Heart className="w-5 h-5 fill-[#AE322A]" />
                 心动
               </button>
@@ -363,17 +389,23 @@ export default function ClubPosterPage() {
 
           {/* 点赞和收藏按钮 */}
           <section className="px-4 pb-6 flex justify-center gap-12">
-            <button className="flex flex-col items-center gap-1 group">
-              <div className="w-10 h-10 rounded-full bg-[#F5F5F5] flex items-center justify-center group-hover:bg-[#F5B70A]/10 group-active:scale-95 transition-all">
-                <ThumbsUp className="w-5 h-5 text-[#999999] group-hover:text-[#F5B70A] transition-colors" />
+            <button
+              onClick={handleToggleLike}
+              className="flex flex-col items-center gap-1 group"
+            >
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 ${isLiked ? "bg-[#F5B70A]/20" : "bg-[#F5F5F5] group-hover:bg-[#F5B70A]/10"}`}>
+                <ThumbsUp className={`w-5 h-5 transition-colors ${isLiked ? "text-[#F5B70A] fill-[#F5B70A]" : "text-[#999999] group-hover:text-[#F5B70A]"}`} />
               </div>
-              <span className="text-[11px] text-[#999999] group-hover:text-[#F5B70A] transition-colors">点赞</span>
+              <span className={`text-[11px] transition-colors ${isLiked ? "text-[#F5B70A] font-medium" : "text-[#999999] group-hover:text-[#F5B70A]"}`}>点赞</span>
             </button>
-            <button className="flex flex-col items-center gap-1 group">
-              <div className="w-10 h-10 rounded-full bg-[#F5F5F5] flex items-center justify-center group-hover:bg-[#F5B70A]/10 group-active:scale-95 transition-all">
-                <Star className="w-5 h-5 text-[#999999] group-hover:text-[#F5B70A] transition-colors" />
+            <button
+              onClick={handleToggleFavorite}
+              className="flex flex-col items-center gap-1 group"
+            >
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 ${clubIsFavorite ? "bg-[#F5B70A]/20" : "bg-[#F5F5F5] group-hover:bg-[#F5B70A]/10"}`}>
+                <Star className={`w-5 h-5 transition-colors ${clubIsFavorite ? "text-[#F5B70A] fill-[#F5B70A]" : "text-[#999999] group-hover:text-[#F5B70A]"}`} />
               </div>
-              <span className="text-[11px] text-[#999999] group-hover:text-[#F5B70A] transition-colors">收藏</span>
+              <span className={`text-[11px] transition-colors ${clubIsFavorite ? "text-[#F5B70A] font-medium" : "text-[#999999] group-hover:text-[#F5B70A]"}`}>收藏</span>
             </button>
           </section>
         </main>

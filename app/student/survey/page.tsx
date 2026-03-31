@@ -26,6 +26,16 @@ const GENDER_OPTIONS = [
   { value: "other", label: "其他", icon: "🌈" },
 ]
 
+const GRADE_OPTIONS = [
+  { value: "freshman", label: "大一" },
+  { value: "sophomore", label: "大二" },
+  { value: "junior", label: "大三" },
+  { value: "senior", label: "大四" },
+  { value: "master1", label: "研一" },
+  { value: "master2", label: "研二" },
+  { value: "master3", label: "研三" },
+]
+
 const PRIMARY_TAG_OPTIONS = [
   { value: "sports", label: "体育", icon: "🏀" },
   { value: "art", label: "艺术", icon: "🎨" },
@@ -116,8 +126,8 @@ const NEWBIE_TRAINING_OPTIONS = [
 ]
 
 const PHILOSOPHY_OPTIONS = [
-  { value: "freedom", label: "想要自由", desc: "松散管理，自主参与", icon: "🦋" },
-  { value: "supervision", label: "想要监督", desc: "有人督促，更有动力", icon: "📋" },
+  { value: "freedom", label: "想要自由", desc: "自主参与", icon: "🦋" },
+  { value: "supervision", label: "想要监督", desc: "更有动力", icon: "📋" },
 ]
 
 const SOCIAL_OPTIONS = [
@@ -127,8 +137,8 @@ const SOCIAL_OPTIONS = [
 ]
 
 const GROUP_OPTIONS = [
-  { value: "big", label: "大家庭", desc: "20人以上，热闹", icon: "👨‍👩‍👧‍👦" },
-  { value: "small", label: "小团体", desc: "20人以下，亲密", icon: "👥" },
+  { value: "big", label: "大家庭", desc: "20人以上, 热闹", icon: "👨‍👩‍👧‍👦" },
+  { value: "small", label: "小团体", desc: "20人以下, 亲密", icon: "👥" },
 ]
 
 const GOAL_OPTIONS = [
@@ -155,7 +165,7 @@ function SurveyInput({
   helper?: string
 }) {
   const [isFocused, setIsFocused] = useState(false)
-  
+
   return (
     <div className="w-full">
       <label className="block text-[16px] font-medium text-[#1A1A1A] mb-2">
@@ -384,7 +394,7 @@ function FeeSelector({
   options: { value: string; label: string; desc: string }[]
 }) {
   const selectedIndex = options.findIndex((opt) => opt.value === value)
-  
+
   return (
     <div className="w-full">
       <label className="block text-[16px] font-medium text-[#1A1A1A] mb-3">
@@ -424,13 +434,15 @@ export default function StudentSurveyPage() {
   const router = useRouter()
   const [currentStep, setCurrentStep] = useState(1)
   const [isAnimating, setIsAnimating] = useState(false)
-  
-  // 表单数据
+
+// 表单数据
   const [formData, setFormData] = useState({
-    name: "",
-    nickname: "",
-    gender: "",
-    avatar: "",
+  name: "",
+  nickname: "",
+  gender: "",
+  grade: "",
+  college: "",
+  avatar: "",
     interest_tag_primary: "",
     interest_tag_secondary: "",
     interest_tag_custom: "",
@@ -464,11 +476,13 @@ export default function StudentSurveyPage() {
       setTimeout(() => {
         setCurrentStep(currentStep + 1)
         setIsAnimating(false)
+        // 滚动到页面顶部
+        window.scrollTo(0, 0)
       }, 150)
-} else {
-    // 提交表单，跳转到匹配结果页
-    router.push("/student/match-result")
-  }
+    } else {
+      // 提交表单，跳转到匹配结果页
+      router.push("/student/match-result")
+    }
   }
 
   const handleBack = () => {
@@ -477,6 +491,8 @@ export default function StudentSurveyPage() {
       setTimeout(() => {
         setCurrentStep(currentStep - 1)
         setIsAnimating(false)
+        // 滚动到页面顶部
+        window.scrollTo(0, 0)
       }, 150)
     } else {
       router.push("/student")
@@ -528,8 +544,8 @@ export default function StudentSurveyPage() {
                   index + 1 < currentStep
                     ? "bg-[#F5B70A] text-white"
                     : index + 1 === currentStep
-                    ? "bg-[#F5B70A] text-white shadow-md scale-110"
-                    : "bg-[#E5E5E5] text-[#999999]"
+                      ? "bg-[#F5B70A] text-white shadow-md scale-110"
+                      : "bg-[#E5E5E5] text-[#999999]"
                 )}
               >
                 {index + 1 < currentStep ? (
@@ -562,8 +578,8 @@ export default function StudentSurveyPage() {
                 <div className="relative group">
                   <div className="absolute inset-0 bg-[#F5B70A]/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300" />
                   {formData.avatar ? (
-                    <img 
-                      src={formData.avatar} 
+                    <img
+                      src={formData.avatar}
                       alt="头像"
                       className="w-24 h-24 rounded-full object-cover relative border-3 border-white shadow-lg group-hover:scale-105 transition-transform duration-200"
                     />
@@ -617,6 +633,21 @@ export default function StudentSurveyPage() {
                   ))}
                 </div>
               </div>
+
+              <SurveySelect
+                label="年级"
+                placeholder="请选择年级"
+                options={GRADE_OPTIONS}
+                value={formData.grade}
+                onChange={(v) => updateFormData("grade", v)}
+              />
+
+              <SurveyInput
+                label="学院"
+                placeholder="请输入所在学院"
+                value={formData.college}
+                onChange={(v) => updateFormData("college", v)}
+              />
             </div>
           )}
 
@@ -649,7 +680,7 @@ export default function StudentSurveyPage() {
               {formData.interest_tag_primary && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <p className="text-[16px] font-medium text-[#1A1A1A] mb-1">
-                    具体��哪个方向？
+                    具体哪个方向？
                   </p>
                   <p className="text-[13px] text-[#666666] mb-3">
                     让我们更精准地了解你
@@ -845,8 +876,8 @@ export default function StudentSurveyPage() {
                       key={opt.value}
                       onClick={() => updateFormData("group_preference", opt.value)}
                       className={cn(
-                        "h-20 rounded-[4px] border-2 transition-all duration-200",
-                        "flex flex-col items-center justify-center gap-1",
+                        "h-24 rounded-[4px] border-2 transition-all duration-200",
+                        "flex flex-col items-center justify-center gap-0.6",
                         formData.group_preference === opt.value
                           ? "border-[#F5B70A] bg-[#F5B70A] text-white shadow-md transform scale-[1.02]"
                           : "border-[#E5E5E5] bg-white text-[#1A1A1A] hover:border-[#F5B70A]/50"
@@ -883,7 +914,7 @@ export default function StudentSurveyPage() {
                   {GOAL_OPTIONS.map((goal) => {
                     const isSelected = formData.main_goals.includes(goal.id)
                     const priority = formData.main_goals.indexOf(goal.id) + 1
-                    
+
                     return (
                       <button
                         key={goal.id}
@@ -895,8 +926,8 @@ export default function StudentSurveyPage() {
                           isSelected
                             ? "border-transparent text-white shadow-md transform scale-[1.02]"
                             : formData.main_goals.length >= 3
-                            ? "border-[#E5E5E5] bg-white/50 text-[#999999] opacity-50 cursor-not-allowed"
-                            : "border-[#E5E5E5] bg-white text-[#1A1A1A] hover:border-[#F5B70A]/50"
+                              ? "border-[#E5E5E5] bg-white/50 text-[#999999] opacity-50 cursor-not-allowed"
+                              : "border-[#E5E5E5] bg-white text-[#1A1A1A] hover:border-[#F5B70A]/50"
                         )}
                         style={{
                           backgroundColor: isSelected ? goal.color : undefined,
