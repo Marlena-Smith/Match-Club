@@ -187,7 +187,6 @@ function MatchCard({
 
 export default function MatchResultPage() {
   const router = useRouter()
-  const pathname = usePathname()
 
   return (
     <div className="min-h-screen bg-[#F9F6E5] flex flex-col font-sans overflow-hidden">
