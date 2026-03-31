@@ -1,10 +1,9 @@
 "use client"
 
-import { Home, Compass, Heart, User, Link2 } from "lucide-react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import { useFavorites } from "@/contexts/favorites-context"
+import { BottomNav, BottomNavSpacer } from "@/components/match-club/bottom-nav"
 
 // iOS风格状态栏组件 - 44px高度
 function StatusBar() {
@@ -221,16 +220,9 @@ function ChainIcon({ className = "" }: { className?: string }) {
   )
 }
 
-// 底部导航项数据
-const navItems = [
-  { label: "首页", href: "/student", icon: Home },
-  { label: "匹配", href: "/student/survey", icon: Compass },
-  { label: "收藏", href: "/student/favorites", icon: Heart },
-  { label: "我的", href: "/student/profile", icon: User },
-]
+
 
 export default function FavoritesPage() {
-  const pathname = usePathname()
   const { favorites, removeFavorite } = useFavorites()
 
   return (
@@ -301,33 +293,12 @@ export default function FavoritesPage() {
           )}
         </main>
 
-        {/* 底部导航 */}
-        <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#E5E5E5] z-50">
-          <div className="max-w-[390px] mx-auto flex items-center justify-around h-14 px-4">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href
-              const Icon = item.icon
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`flex flex-col items-center justify-center flex-1 h-full transition-colors duration-200 ${isActive ? "text-[#F5B70A]" : "text-[#999999] hover:text-[#666666]"
-                    }`}
-                >
-                  <Icon
-                    className={`w-6 h-6 mb-0.5 transition-transform ${isActive ? "scale-105" : ""}`}
-                    strokeWidth={isActive ? 2.5 : 2}
-                  />
-                  <span className={`text-[11px] ${isActive ? "font-semibold" : ""}`}>
-                    {item.label}
-                  </span>
-                </Link>
-              )
-            })}
-          </div>
-        </nav>
+        {/* 底部导航栏占位 */}
+        <BottomNavSpacer />
       </div>
+
+      {/* 底部导航栏 */}
+      <BottomNav type="student" />
     </div>
   )
 }

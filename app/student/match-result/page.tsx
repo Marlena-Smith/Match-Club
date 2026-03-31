@@ -1,8 +1,9 @@
 "use client"
 
-import { ChevronLeft, Home, Compass, Heart, User } from "lucide-react"
+import { ChevronLeft } from "lucide-react"
 import Link from "next/link"
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter } from "next/navigation"
+import { BottomNav, BottomNavSpacer } from "@/components/match-club/bottom-nav"
 
 // 模拟匹配结果数据
 const matchResults = [
@@ -182,17 +183,10 @@ function MatchCard({
   )
 }
 
-// 底部导航项数据
-const navItems = [
-  { label: "首页", href: "/student", icon: Home },
-  { label: "匹配", href: "/student/survey", icon: Compass },
-  { label: "收藏", href: "/student/favorites", icon: Heart },
-  { label: "我的", href: "/student/profile", icon: User },
-]
+
 
 export default function MatchResultPage() {
   const router = useRouter()
-  const pathname = usePathname()
 
   return (
     <div className="min-h-screen bg-[#F9F6E5] flex flex-col font-sans overflow-hidden">
@@ -259,36 +253,12 @@ export default function MatchResultPage() {
           </section>
         </main>
 
-        {/* 底部导航 - 固定在底部 */}
-        <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#E5E5E5] z-50">
-          <div className="max-w-[390px] mx-auto flex items-center justify-around h-14 px-4">
-            {navItems.map((item) => {
-              // 匹配结果页面属于"匹配"tab
-              const isActive = item.href === "/student/survey"
-                ? (pathname === "/student/survey" || pathname === "/student/match-result")
-                : pathname === item.href
-              const Icon = item.icon
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`flex flex-col items-center justify-center flex-1 h-full transition-colors duration-200 ${isActive ? "text-[#F5B70A]" : "text-[#999999] hover:text-[#666666]"
-                    }`}
-                >
-                  <Icon
-                    className={`w-6 h-6 mb-0.5 transition-transform ${isActive ? "scale-105" : ""}`}
-                    strokeWidth={isActive ? 2.5 : 2}
-                  />
-                  <span className={`text-[11px] ${isActive ? "font-semibold" : ""}`}>
-                    {item.label}
-                  </span>
-                </Link>
-              )
-            })}
-          </div>
-        </nav>
+        {/* 底部导航栏占位 */}
+        <BottomNavSpacer />
       </div>
+
+      {/* 底部导航栏 */}
+      <BottomNav type="student" />
     </div>
   )
 }
