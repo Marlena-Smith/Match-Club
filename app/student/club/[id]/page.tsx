@@ -377,7 +377,10 @@ export default function ClubPosterPage() {
               <button className="flex-1 h-[44px] border border-[#E5E5E5] rounded-[8px] text-[16px] font-medium text-[#666666] bg-white hover:bg-[#F5F5F5] active:scale-[0.98] transition-all shadow-sm">
                 再看看吧
               </button>
-              <button className="flex-1 h-[44px] border-2 border-[#AE322A] rounded-[8px] text-[16px] font-semibold text-[#AE322A] bg-white hover:bg-[#FFF5F5] active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-sm">
+              <button
+                onClick={() => router.push(`/student/apply/${clubData.id}`)}
+                className="flex-1 h-[44px] border-2 border-[#AE322A] rounded-[8px] text-[16px] font-semibold text-[#AE322A] bg-white hover:bg-[#FFF5F5] active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-sm"
+              >
                 <Heart className="w-5 h-5 fill-[#AE322A]" />
                 心动
               </button>
