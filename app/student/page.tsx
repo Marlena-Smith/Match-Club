@@ -1,15 +1,64 @@
 "use client"
 
-import { MCButton } from "@/components/match-club/mc-button"
+import { useState, useRef } from "react"
 import { BottomNav, BottomNavSpacer } from "@/components/match-club/bottom-nav"
 import { StatusBar } from "@/components/match-club/status-bar"
-import { Bell } from "lucide-react"
+import { Heart, X, Camera } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+
+// 模拟热门社团数据
+const hotClubs = [
+  { id: "1", name: "合唱团" },
+  { id: "2", name: "足球社" },
+  { id: "3", name: "棋牌社" },
+  { id: "4", name: "文学社" },
+  { id: "5", name: "摄影社" },
+  { id: "6", name: "篮球社" },
+]
+
+// 模拟匹配过的社团数据
+const matchedClubs = [
+  { id: "1", name: "合唱团" },
+  { id: "2", name: "足球社" },
+  { id: "3", name: "棋牌社" },
+  { id: "4", name: "文学社" },
+]
 
 export default function StudentHomePage() {
-  // 模拟登录状态
-  const isLoggedIn = false
-  const userName = "小明"
+  const router = useRouter()
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userName, setUserName] = useState("")
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
+  const [showLoginModal, setShowLoginModal] = useState(false)
+  const [loginForm, setLoginForm] = useState({ studentId: "", password: "" })
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // 处理头像上传
+  const handleAvatarClick = () => {
+    fileInputRef.current?.click()
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setAvatarUrl(reader.result as string)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  // 处理登录
+  const handleLogin = () => {
+    if (loginForm.studentId && loginForm.password) {
+      setIsLoggedIn(true)
+      setUserName(loginForm.studentId.slice(-4))
+      setShowLoginModal(false)
+      setLoginForm({ studentId: "", password: "" })
+    }
+  }
 
   return (
     <div className="min-h-screen bg-[#F9F6E5] flex flex-col overflow-hidden font-['PingFang_SC',_-apple-system,_sans-serif]">
@@ -18,79 +67,120 @@ export default function StudentHomePage() {
         {/* 状态栏 */}
         <StatusBar />
 
-        {/* 顶部区域 - 消息和头像 */}
-        <header className="px-4 py-4 flex items-start justify-between relative z-10">
-          {/* 左侧消息入口 */}
-          <Link href="/student/messages" className="flex flex-col items-center gap-1">
-            <div className="w-10 h-10 rounded bg-[#F5B70A]/20 flex items-center justify-center">
-              <Bell className="w-5 h-5 text-[#F5B70A]" />
-            </div>
-            <span className="text-[13px] text-[#666666]">消息</span>
+        {/* 顶部区域 - 收藏和登录 */}
+        <header className="h-[44px] px-4 flex items-center justify-between relative z-10">
+          {/* 左侧收藏入口 */}
+          <Link href="/student/favorites" className="flex flex-col items-center gap-0.5">
+            <Heart className="w-6 h-6 text-[#666666]" />
+            <span className="text-[11px] text-[#666666]">收藏</span>
           </Link>
 
           {/* 右侧头像和登录 */}
-          <Link href={isLoggedIn ? "/student/profile" : "/login"} className="flex flex-col items-center gap-1">
-            <div className="w-20 h-20 rounded-full bg-[#F0F0F0] border-2 border-[#E5E5E5] flex items-center justify-center text-[24px] font-medium text-[#666666]">
-              {isLoggedIn ? userName.slice(0, 2) : "?"}
-            </div>
-            <span className="text-[13px] text-[#666666]">
+          <div className="flex flex-col items-center gap-0.5">
+            {/* 头像 - 点击上传 */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleFileChange}
+            />
+            <button
+              onClick={handleAvatarClick}
+              className="w-12 h-12 rounded-full bg-[#F0F0F0] border-2 border-[#E5E5E5] flex items-center justify-center overflow-hidden hover:border-[#F5B70A] transition-colors"
+            >
+              {avatarUrl ? (
+                <img src={avatarUrl} alt="头像" className="w-full h-full object-cover" />
+              ) : (
+                <Camera className="w-5 h-5 text-[#999999]" />
+              )}
+            </button>
+            {/* 登录按钮 */}
+            <button
+              onClick={() => isLoggedIn ? router.push("/student/profile") : setShowLoginModal(true)}
+              className="text-[11px] text-[#666666] hover:text-[#F5B70A] transition-colors"
+            >
               {isLoggedIn ? userName : "登录"}
-            </span>
-          </Link>
+            </button>
+          </div>
         </header>
 
-        {/* 中间插图区域 */}
-        <div className="flex-1 relative">
-          {/* 背景装饰 - 可以替换为实际插图 */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-64 h-64 rounded-full bg-[#F5B70A]/10" />
-          </div>
+        {/* 主内容区域 */}
+        <main className="flex-1 px-4 overflow-y-auto pb-4" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+          <style jsx>{`main::-webkit-scrollbar { display: none; }`}</style>
           
-          {/* 底部白色弧形区域 */}
-          <div className="absolute bottom-0 left-0 right-0">
-            {/* 弧形背景 */}
-            <div 
-              className="h-80 bg-white"
-              style={{
-                borderTopLeftRadius: "50% 60px",
-                borderTopRightRadius: "50% 60px",
-              }}
-            >
-              {/* 按钮区域 */}
-              <div className="pt-16 px-16 flex flex-col gap-4">
-                <Link href="/student/survey">
-                  <MCButton 
-                    variant="ghost" 
-                    fullWidth 
-                    className="h-12 rounded-[20px] text-[16px] font-medium bg-[#F0F0F0] hover:bg-[#E5E5E5] text-[#1A1A1A]"
+          {/* 热门社团 */}
+          <section className="mt-4">
+            <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-2" style={{ fontFamily: "PingFang SC" }}>
+              热门社团
+            </h2>
+            {/* 大卡片容器 341x134px */}
+            <div className="w-[341px] h-[134px] bg-white rounded-[8px] border border-[#E5E5E5] p-3 overflow-hidden">
+              {/* 小卡片横向滚动容器 */}
+              <div 
+                className="flex gap-2 overflow-x-auto pb-1" 
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                <style jsx>{`div::-webkit-scrollbar { display: none; }`}</style>
+                {hotClubs.map((club) => (
+                  <Link
+                    key={club.id}
+                    href={`/student/club/${club.id}`}
+                    className="flex-shrink-0 flex flex-col items-center"
                   >
-                    个人画像
-                  </MCButton>
-                </Link>
-                
-                <Link href="/student/match-result">
-                  <MCButton 
-                    variant="ghost" 
-                    fullWidth 
-                    className="h-12 rounded-[20px] text-[16px] font-medium bg-[#F0F0F0] hover:bg-[#E5E5E5] text-[#1A1A1A]"
-                  >
-                    匹配社团
-                  </MCButton>
-                </Link>
-                
-                <Link href="/student/browse">
-                  <MCButton 
-                    variant="ghost" 
-                    fullWidth 
-                    className="h-12 rounded-[20px] text-[16px] font-medium bg-[#F0F0F0] hover:bg-[#E5E5E5] text-[#1A1A1A]"
-                  >
-                    浏览社团
-                  </MCButton>
-                </Link>
+                    {/* 小卡片 82x88px */}
+                    <div className="w-[82px] h-[68px] bg-[#F0F0F0] rounded-[4px] hover:bg-[#E5E5E5] transition-colors" />
+                    {/* 社团名 13px 常规体 间距8px */}
+                    <span className="mt-2 text-[13px] text-[#1A1A1A] text-center" style={{ fontFamily: "PingFang SC", fontWeight: 400 }}>
+                      {club.name}
+                    </span>
+                  </Link>
+                ))}
               </div>
             </div>
-          </div>
-        </div>
+          </section>
+
+          {/* 匹配过的 - 与上方间距24px */}
+          <section className="mt-6">
+            <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-2" style={{ fontFamily: "PingFang SC" }}>
+              匹配过的
+            </h2>
+            {/* 大卡片容器 341x134px */}
+            <div className="w-[341px] h-[134px] bg-white rounded-[8px] border border-[#E5E5E5] p-3 overflow-hidden">
+              {/* 小卡片横向滚动容器 */}
+              <div 
+                className="flex gap-2 overflow-x-auto pb-1" 
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                <style jsx>{`div::-webkit-scrollbar { display: none; }`}</style>
+                {matchedClubs.map((club) => (
+                  <Link
+                    key={club.id}
+                    href={`/student/club/${club.id}`}
+                    className="flex-shrink-0 flex flex-col items-center"
+                  >
+                    {/* 小卡片 82x88px */}
+                    <div className="w-[82px] h-[68px] bg-[#F0F0F0] rounded-[4px] hover:bg-[#E5E5E5] transition-colors" />
+                    {/* 社团名 13px 常规体 间距8px */}
+                    <span className="mt-2 text-[13px] text-[#1A1A1A] text-center" style={{ fontFamily: "PingFang SC", fontWeight: 400 }}>
+                      {club.name}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* 现在去匹配按钮 */}
+          <section className="mt-8 flex justify-center">
+            <button
+              onClick={() => router.push("/student/survey")}
+              className="w-[200px] h-[48px] bg-[#4A9ECC] hover:bg-[#3A8EBC] active:scale-[0.98] text-white text-[16px] font-medium rounded-[24px] shadow-md transition-all"
+            >
+              现在去匹配
+            </button>
+          </section>
+        </main>
 
         {/* 底部导航栏占位 */}
         <BottomNavSpacer />
@@ -98,6 +188,54 @@ export default function StudentHomePage() {
 
       {/* 底部导航栏 */}
       <BottomNav type="student" />
+
+      {/* 登录弹窗 */}
+      {showLoginModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="w-[320px] bg-white rounded-[12px] p-6 relative">
+            {/* 关闭按钮 */}
+            <button
+              onClick={() => setShowLoginModal(false)}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#F0F0F0] transition-colors"
+            >
+              <X className="w-5 h-5 text-[#666666]" />
+            </button>
+
+            <h3 className="text-[18px] font-semibold text-[#1A1A1A] text-center mb-6">
+              登录
+            </h3>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-[14px] text-[#666666] mb-2">校园一卡通学号</label>
+                <input
+                  type="text"
+                  value={loginForm.studentId}
+                  onChange={(e) => setLoginForm({ ...loginForm, studentId: e.target.value })}
+                  placeholder="请输入学号"
+                  className="w-full h-[44px] px-4 border border-[#E5E5E5] rounded-[8px] text-[14px] focus:outline-none focus:border-[#F5B70A] transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-[14px] text-[#666666] mb-2">密码</label>
+                <input
+                  type="password"
+                  value={loginForm.password}
+                  onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+                  placeholder="请输入密码"
+                  className="w-full h-[44px] px-4 border border-[#E5E5E5] rounded-[8px] text-[14px] focus:outline-none focus:border-[#F5B70A] transition-colors"
+                />
+              </div>
+              <button
+                onClick={handleLogin}
+                className="w-full h-[44px] bg-[#F5B70A] hover:bg-[#E5A700] text-white text-[16px] font-medium rounded-[8px] transition-colors mt-4"
+              >
+                登录
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
