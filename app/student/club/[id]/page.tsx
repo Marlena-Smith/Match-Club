@@ -17,7 +17,7 @@ const clubData = {
   tags: ["音乐", "唱歌", "摇滚", "吉他"],
 
   // 我们是谁
-  aboutUs: "[简介] 这里是一群热爱音乐并值得信任的朋友。在音乐的领域里, 我们不断探索, 找到属于自己的火花。历史渊源巴拉巴拉, 今天, SUMA已经巴拉拉巴拉",
+  aboutUs: "这里是一群热爱音乐并值得信任的朋友。在音乐的领域里，我们不断探索，找到属于自己的火花。历史渊源巴拉巴拉，今天，SUMA已经巴拉拉巴拉",
 
   // 光辉事迹
   achievements: [
@@ -235,7 +235,7 @@ export default function ClubPosterPage() {
                 >
                   {achievement.imagePosition === "left" ? (
                     <>
-                      {/* 图片在�� */}
+                      {/* 图片在左 */}
                       <div className="w-[100px] h-[120px] bg-[#E5E5E5] rounded-[4px] flex-shrink-0" />
                       <div className="flex-1 flex flex-col">
                         <h4 className="text-[16px] font-semibold text-[#1A1A1A]">{achievement.title}</h4>
@@ -260,7 +260,7 @@ export default function ClubPosterPage() {
               ))}
             </div>
 
-            {/* 活动信息��片 */}
+            {/* 活动信息卡片 */}
             <div className="mt-[8px] w-[340px] mx-auto bg-[#F5B70A]/5 rounded-[8px] p-[16px] border border-[#F5B70A]/20">
               <div className="grid grid-cols-3 gap-[8px] text-center">
                 <div>
@@ -351,7 +351,7 @@ export default function ClubPosterPage() {
                 <div className="w-[64px] h-[64px] rounded-full bg-[#F5B70A]/20 border-2 border-[#F5B70A] flex items-center justify-center shadow-sm">
                   <span className="text-[20px] text-[#F5B70A] font-semibold">{clubData.president.name.charAt(0)}</span>
                 </div>
-                <span className="text-[13px] text-[#666666] font-medium mt-1">社���</span>
+                <span className="text-[13px] text-[#666666] font-medium mt-1">社长</span>
                 <span className="text-[12px] text-[#999999]">{clubData.president.name}</span>
               </div>
             </div>
