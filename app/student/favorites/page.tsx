@@ -1,7 +1,9 @@
 "use client"
 
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState, useRef } from "react"
+import { ChevronLeft } from "lucide-react"
 import { useFavorites } from "@/contexts/favorites-context"
 import { BottomNav, BottomNavSpacer } from "@/components/match-club/bottom-nav"
 
@@ -223,11 +225,12 @@ function ChainIcon({ className = "" }: { className?: string }) {
 
 
 export default function FavoritesPage() {
+  const router = useRouter()
   const { favorites, removeFavorite } = useFavorites()
 
   return (
     <div className="min-h-screen bg-[#F9F6E5] flex flex-col font-sans overflow-hidden">
-      {/* 隐藏滚动条的全局样式 */}
+      {/* 隐��滚动条的全局样式 */}
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
@@ -244,7 +247,12 @@ export default function FavoritesPage() {
 
         {/* 顶部导航 - 44px */}
         <header className="h-[44px] px-4 flex items-center">
-          <div className="w-8 h-8" />
+          <button
+            onClick={() => router.push("/student")}
+            className="w-8 h-8 flex items-center justify-center rounded-[4px] hover:bg-[#F5B70A]/10 active:scale-95 transition-all"
+          >
+            <ChevronLeft className="w-6 h-6 text-[#1A1A1A]" />
+          </button>
           <h1 className="flex-1 text-center text-[18px] font-semibold text-[#1A1A1A]">我的收藏</h1>
           <div className="w-8 h-8" />
         </header>
@@ -268,7 +276,7 @@ export default function FavoritesPage() {
 
               {/* 引导按钮 */}
               <Link
-                href="/student/match-result"
+                href="/student"
                 className="mt-8 px-6 py-2.5 bg-[#F5B70A] text-white text-[14px] font-medium rounded-[8px] hover:bg-[#E5A700] active:scale-[0.98] transition-all shadow-sm"
               >
                 去看看社团

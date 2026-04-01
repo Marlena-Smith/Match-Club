@@ -17,7 +17,7 @@ const clubData = {
   tags: ["音乐", "唱歌", "摇滚", "吉他"],
 
   // 我们是谁
-  aboutUs: "这里是一群热爱音乐并值得信任的朋友。在音乐的领域里，我们不断探索，找到属于自己的火花。历史渊源巴拉巴拉，今天，SUMA已经巴拉拉巴拉",
+  aboutUs: "We are a group of friends who love music and trust each other. In the field of music, we keep exploring to find our own spark. SUMA has grown into a wonderful community.",
 
   // 光辉事迹
   achievements: [
