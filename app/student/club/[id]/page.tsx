@@ -166,7 +166,7 @@ export default function ClubPosterPage() {
         {/* 顶部导航 - 44px */}
         <header className="h-[44px] px-4 flex items-center bg-[#F9F6E5]">
           <button
-            onClick={() => router.push("/student/match-result")}
+            onClick={() => router.back()}
             className="w-8 h-8 flex items-center justify-center rounded-[4px] hover:bg-[#F5B70A]/10 active:scale-95 transition-all"
           >
             <ChevronLeft className="w-6 h-6 text-[#1A1A1A]" />
